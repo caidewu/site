@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="CSS学习笔记"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>CSS学习笔记 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            CSS学习笔记
+            
+          </h1>
+          <p class="posted-on">
+          2016-03-09
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/CSS/" rel="tag">
+                  CSS
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h2 id="CSS代码风格"><a href="#CSS代码风格" class="headerlink" title="CSS代码风格"></a>CSS代码风格</h2><h3 id="声明顺序"><a href="#声明顺序" class="headerlink" title="声明顺序"></a>声明顺序</h3><p>相关的属性声明应该以下面的顺序分组处理：</p>
+<ol>
+<li>Positioning</li>
+<li>Box model 盒模型</li>
+<li>Typographic 排版</li>
+<li>Visual 外观</li>
+</ol>
+<p>Positioning 处在第一位，因为他可以使一个元素脱离正常文本流，并且覆盖盒模型相关的样式。盒模型紧跟其后，因为他决定了一个组件的大小和位置。</p>
+<p>其他属性只在组件 内部 起作用或者不会对前面两种情况的结果产生影响，所以他们排在后面。<br><a id="more"></a><br>示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">.declaration-order &#123;</span><br><span class="line">    &#x2F;* Positioning *&#x2F;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 0;</span><br><span class="line">    right: 0;</span><br><span class="line">    bottom: 0;</span><br><span class="line">    left: 0;</span><br><span class="line">    z-index: 100;</span><br><span class="line"></span><br><span class="line">    &#x2F;* Box-model *&#x2F;</span><br><span class="line">    display: block;</span><br><span class="line">    float: right;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100px;</span><br><span class="line"></span><br><span class="line">    &#x2F;* Typography *&#x2F;</span><br><span class="line">    font: normal 13px &quot;Helvetica Neue&quot;, sans-serif;</span><br><span class="line">    line-height: 1.5;</span><br><span class="line">    color: #333;</span><br><span class="line">    text-align: center;</span><br><span class="line"></span><br><span class="line">    &#x2F;* Visual *&#x2F;</span><br><span class="line">    background-color: #f5f5f5;</span><br><span class="line">    border: 1px solid #e5e5e5;</span><br><span class="line">    border-radius: 3px;</span><br><span class="line"></span><br><span class="line">    &#x2F;* Misc *&#x2F;</span><br><span class="line">    opacity: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="display属性：block，inline和inlinke-block"><a href="#display属性：block，inline和inlinke-block" class="headerlink" title="display属性：block，inline和inlinke-block"></a>display属性：block，inline和inlinke-block</h2><ul>
+<li>block元素可以包含block元素和inline元素；但inline元素只能包含inline元素。<strong>要注意的是这个是个大概的说法</strong>，每个特定的元素能包含的元素也是特定的，比如 P 元素，只能包含inline元素，而不能包含block元素。</li>
+<li><code>display:block</code>: 独占一行，有宽高，支持margin、padding</li>
+<li><code>display:inline</code>: 不能指定宽高，宽高由内容控制，多个元素排满一行才换行，水平方向padding，margin才有效</li>
+<li><code>display:inline-block</code>: 简单来说就是将对象呈现为inline对象，但是对象的内容作为block对象呈现。</li>
+</ul>
+<p>每个元素都有一个默认的 display 类型。不过你可以随时随地的重写它！<br><br>常见的例子是：把 li 元素修改成 inline，制作成水平菜单。</p>
+<h3 id="inline-block元素的空白间距"><a href="#inline-block元素的空白间距" class="headerlink" title="inline-block元素的空白间距"></a>inline-block元素的空白间距</h3><p>在父元素中设置font-size:0,用来兼容chrome，</p>
+<p>而使用letter-space:-N px来兼容safari(ps. 实测最新的safari通过设置font-size就可以解决)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.finally-solve &#123;</span><br><span class="line">  letter-spacing: -4px;&#x2F;*根据不同字体字号或许需要做一定的调整*&#x2F;</span><br><span class="line">  word-spacing: -4px;</span><br><span class="line">  font-size: 0;</span><br><span class="line">&#125;</span><br><span class="line">.finally-solve li &#123;</span><br><span class="line">  font-size: 16px;</span><br><span class="line">  letter-spacing: normal;</span><br><span class="line">  word-spacing: normal;</span><br><span class="line">  display:inline-block;</span><br><span class="line">  *display: inline;</span><br><span class="line">  zoom:1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="定位-position"><a href="#定位-position" class="headerlink" title="定位(position)"></a>定位(position)</h2><p>通过 position属性可以选择4中不同的定位类型</p>
+<ul>
+<li><em><code>static</code></em>: 正常生成，</li>
+<li><em><code>relative</code></em>: 相对元素本身的位置进行浮动，原先所在空间保留</li>
+<li><em><code>absolute</code></em>: 相对文档（0,0）位置进行浮动，不占文档流的位置</li>
+<li><em><code>fixed</code></em>: 相对窗口（0,0）位置进行浮动</li>
+</ul>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ol>
+<li>fixed定位的时候相对是窗口（viewport）来进行定位，</li>
+<li>而absolute要看父级有没有relative，如果有就相对该元素进行定位，否则就相对整个文档来定位，即<strong>浏览器左上角</strong></li>
+<li>如果父元素已经是absolute，子元素是根据父元素的(0,0)位置进行浮动，所以，父元素的padding对子元素是没有用的了</li>
+</ol>
+<p>position还有一个值：inherit，用于继承父元素的position</p>
+<p><em><code>z-index</code></em>:<br>定位就会有堆叠情况，通过<code>z-index</code>来区分层级关系，</p>
+<ul>
+<li>值越大越靠前(靠近用户)，可以为负数,</li>
+<li>相同的值，谁排在后面，谁就显示靠前</li>
+<li>没有设置z-index时，定位元素比文档流中的元素靠前</li>
+<li>如果父元素的z-index有效，则子元素无论设置什么值都无效，跟随父元素</li>
+<li>如果父元素没有指定z-index或失效，子元素的z-index就可以生效</li>
+</ul>
+<h2 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h2><p><strong>块级元素默认是会撑满水平方向空间的</strong>，设置块级元素的 width 可以阻止它从左到右撑满容器。然后你就可以设置左右外边距为 auto 来使其水平居中。元素会占据你所指定的宽度，然后剩余的宽度会一分为二成为左右外边距。</p>
+<ul>
+<li>水平居中</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.main &#123;</span><br><span class="line">	width: 500px;</span><br><span class="line">	margin: 0 auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>唯一的问题是，当浏览器窗口比元素的宽度还要窄时，浏览器会显示一个水平滚动条来容纳页面。<br>所以可以使用<code>max-width</code>属性替换<code>width</code></p>
+<ul>
+<li>垂直居中</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">position: absolute;</span><br><span class="line">top:50%;</span><br><span class="line">margin-top: -300px; &#x2F;*设置为高度的一半*&#x2F;</span><br></pre></td></tr></table></figure>
+<p>同理，如果希望垂直水平居中<br>加上以下样式即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">left:50%;</span><br><span class="line">margin-left: -300px;&#x2F;*设置为宽度的一半*&#x2F;</span><br></pre></td></tr></table></figure>
+<h3 id="float相关"><a href="#float相关" class="headerlink" title="float相关"></a>float相关</h3><p>浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。<br>由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样。</p>
+<p>css 有三种定位机制： 普通流，浮动，绝对定位</p>
+<p>浮动层：给元素的float属性赋值后，就是脱离文档流，进行左右浮动，紧贴着<strong>父元素</strong>(默认为body文本区域)的左右边框。</p>
+<p>而此浮动元素在文档流空出的位置，由后续的(非浮动)元素填充上去：</p>
+<ul>
+<li>块级元素：直接填充上去，若跟浮动元素的范围发生重叠，浮动元素覆盖块级元素。</li>
+<li>内联元素：有空隙就插入。</li>
+</ul>
+<h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><p>如果浮动元素下方的元素不受浮动元素的影响，可以使用<code>clear: both;</code>来清除浮动</p>
+<h3 id="CSS3-3D-Transforms相关"><a href="#CSS3-3D-Transforms相关" class="headerlink" title="CSS3 3D Transforms相关"></a>CSS3 3D Transforms相关</h3><p><code>-webkit-backface-visibility:hidden</code>: 当元素不面向屏幕是隐藏</p>
+<p><code>-webkit-transform-style:preserve-3d</code>: 支持子元素的3d效果</p>
+<p><code>-webkit-transform:translate(0px,0px) rotateY(0deg);</code>: 定义位移以及沿着Y轴旋转</p>
+<ul>
+<li><code>translate</code>: 平移 </li>
+<li><code>rotateY</code>,<code>rotateX</code>,<code>rotate</code>: 旋转</li>
+<li><code>skew</code>: 定义沿着 X 和 Y 轴的 2D 倾斜转换</li>
+<li><code>scale</code>: 缩放 </li>
+</ul>
+<p><code>transform-origin</code>: 变换的原点，比如旋转（<code>rotate</code>）时，就是值旋转的圆心座标，默认是50%,50%,即中心点）</p>
+<ul>
+<li>如果是3D变换，则还有第三个属性值z，默认是为0</li>
+</ul>
+<p><code>-webkit-perspective</code>: perspective 属性定义 3D 元素距视图的距离，以像素计。该样式设在3d变换元素的富元素上</p>
+<h3 id="过渡动画"><a href="#过渡动画" class="headerlink" title="过渡动画"></a>过渡动画</h3><p><code>transition: property duration timing-function delay</code> 属性 持续时间 时间函数 延时</p>
+<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><ul>
+<li>推荐在全局设置<code>border-box</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*, *:after, *:before &#123;</span><br><span class="line">  -webkit-box-sizing: border-box;</span><br><span class="line">     -moz-box-sizing: border-box;</span><br><span class="line">          box-sizing: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>box-sizing</code>: 定义盒子包不包括边框，默认是ccs2.1定义的盒子模型，即盒子的宽高是内容的宽高，padding和border在盒子之外<br>当值为<code>border-box</code>时，为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。</p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>当<code>border</code>,<code>padding</code>的实际大小大于宽高时，宽高将会被改变</li>
+<li>当文字内容是连续的英文字母，默认是不会换行的, TODO: 这个要处理一下</li>
+<li>当内容多过容器时，内容会超出容器，但容器大小是不会被改变的，修复溢出内容可以通过设置<code>overflow: auto</code>在容器内滚动，（或者设置hidden，隐藏多出的，一般不这样做）</li>
+</ol>
+<p><code>box-shadow</code>: 阴影，x, y, 阴影模糊范围,阴影尺寸, color，inset（内阴影）</p>
+<h3 id="css单位"><a href="#css单位" class="headerlink" title="css单位"></a>css单位</h3><ul>
+<li><code>%</code></li>
+<li><code>px</code></li>
+<li><code>em</code></li>
+</ul>
+<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p>动画和变换是不一样的，虽然都在动</p>
+<ul>
+<li>通过<code>@keyframes</code> 定义动画</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* 简单的 *&#x2F;</span><br><span class="line">@keyframes easy</span><br><span class="line">&#123;</span><br><span class="line">from &#123;top:0px;&#125;</span><br><span class="line">to &#123;top:200px;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* 可设定不同时期的动作 *&#x2F;</span><br><span class="line">@keyframes myfirst</span><br><span class="line">&#123;</span><br><span class="line">0%   &#123;background:red; left:0px; top:0px;&#125;</span><br><span class="line">25%  &#123;background:yellow; left:200px; top:0px;&#125;</span><br><span class="line">50%  &#123;background:blue; left:200px; top:200px;&#125;</span><br><span class="line">75%  &#123;background:green; left:0px; top:200px;&#125;</span><br><span class="line">100% &#123;background:red; left:0px; top:0px;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在元素上设置<code>animation</code>的样式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;* 样式引用动画 *&#x2F;</span><br><span class="line">div &#123;</span><br><span class="line">	animation: myfirst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="字体图标"><a href="#字体图标" class="headerlink" title="字体图标"></a>字体图标</h3><p>字体文件一般定义了字符对应的图形特征，</p>
+<h4 id="使用步骤："><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h4><ul>
+<li>引入字体文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@font-face &#123;</span><br><span class="line">	font-family: &#39;diyfont&#39;;</span><br><span class="line">	src: url(&#39;diyfont.eot&#39;); &#x2F;* IE9+ *&#x2F;</span><br><span class="line">	src: url(&#39;diyfont.eot?#iefix&#39;) format(&#39;embedded-opentype&#39;), &#x2F;* IE6-IE8 *&#x2F;</span><br><span class="line">		 url(&#39;diyfont.woff&#39;) format(&#39;woff&#39;), &#x2F;* chrome、firefox *&#x2F;</span><br><span class="line">		 url(&#39;diyfont.ttf&#39;) format(&#39;truetype&#39;), &#x2F;* chrome、firefox、opera、Safari, Android, iOS 4.2+*&#x2F;</span><br><span class="line">		 url(&#39;diyfont.svg#fontname&#39;) format(&#39;svg&#39;); &#x2F;* iOS 4.1- *&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用字体，本质上和普通文字使用字体是一样的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">.test-font &#123;</span><br><span class="line">	font-family: &#39;iconfont&#39;;</span><br><span class="line">	font-style: normal;</span><br><span class="line">	font-size: 32px;</span><br><span class="line">	line-height: 2;</span><br><span class="line">	letter-spacing: .25em;</span><br><span class="line">	-webkit-font-smoothing: antialiased;</span><br><span class="line">	-webkit-text-stroke-width: 0.2px;</span><br><span class="line">	-moz-osx-font-smoothing: grayscale;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;test-font&quot;&gt;&amp;#13363;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>说明：<code>&amp;#13363;</code>即字体文件中定义的字符unicode编码，在HTML页面中使用<code>&amp;#xxxxx;</code>的字符表示 ，十进制的如<code>&amp;#59392;</code>，16进制方式如<code>&amp;#e800；</code></p>
+<p>而一般在css的伪类中只能使用反斜杠转义的16进制方式如<code>\e800</code>,e800即十进制的59392</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.test:before &#123;</span><br><span class="line">	content: &#39;\e800&#39;;</span><br><span class="line">	font-family: &#39;iconfont&#39;;</span><br><span class="line">	font-size: 80%;</span><br><span class="line">	&#x2F;* 可选 *&#x2F;</span><br><span class="line">	display: inline-block;</span><br><span class="line">	line-height: 30px;</span><br><span class="line">	text-align: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>vertical-align</code>: 设置元素的垂直对齐方式<br><br>当文字在同一行需要有不一样的对其方式可以用改属性进行调整</p>
+<p><code>list-style: none;</code>: 去除<code>li</code>默认的点</p>
+<p><code>text-decoration: none;</code>: 去除a标签的下划线</p>
+<p><code>letter-spacing</code>: 增加或减少字符间的空白（字符间距）</p>
+<p><code>word-spacing</code>: 文字中空格的间距大小</p>
+<h3 id="文字过长省略号处理"><a href="#文字过长省略号处理" class="headerlink" title="文字过长省略号处理"></a>文字过长省略号处理</h3><ul>
+<li>单行 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.too-long &#123;</span><br><span class="line">    width: 249px;</span><br><span class="line">    text-overflow: ellipsis;&#x2F;*这就是省略号喽*&#x2F;</span><br><span class="line">    overflow: hidden;&#x2F;*设置超过的隐藏*&#x2F;</span><br><span class="line">    white-space: nowrap;&#x2F;*设置不折行*&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>多行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.multi-line &#123;  &#x2F;*移动端方案*&#x2F;</span><br><span class="line">    overflow : hidden;</span><br><span class="line">    text-overflow: ellipsis;</span><br><span class="line">    display: -webkit-box;</span><br><span class="line">    -webkit-line-clamp: 2;</span><br><span class="line">    -webkit-box-orient: vertical;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p &#123;		&#x2F;*pc端兼容多浏览器方案，不考虑IE6，7*&#x2F;</span><br><span class="line">    position:relative;</span><br><span class="line">    line-height:1.4em;</span><br><span class="line">    &#x2F;* 3 times the line-height to show 3 lines *&#x2F;</span><br><span class="line">    height:4.2em;</span><br><span class="line">    overflow:hidden;</span><br><span class="line">&#125;</span><br><span class="line">p:after &#123;</span><br><span class="line">    content:&quot;...&quot;;</span><br><span class="line">    font-weight:bold;</span><br><span class="line">    position:absolute;</span><br><span class="line">    bottom:0;</span><br><span class="line">    right:0;</span><br><span class="line">    padding:0 20px 1px 45px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="颜色渐变"><a href="#颜色渐变" class="headerlink" title="颜色渐变"></a>颜色渐变</h3><p><code>linear-gradient</code></p>
+<h3 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h3><p><code>box-shadow: 10px 10px 1px 3px #fff inset</code></p>
+<h3 id="水平垂直居中-1"><a href="#水平垂直居中-1" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.Absolute-Center &#123;</span><br><span class="line">  width: 120px;</span><br><span class="line">  height: 80px;</span><br><span class="line">  margin: auto;</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 0; left: 0; bottom: 0; right: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>好处</strong>：</p>
+<ul>
+<li>跨浏览器，兼容性好（无需hack，可兼顾IE8~IE10）</li>
+<li>无特殊标记，样式更精简</li>
+<li>自适应布局，可以使用百分比和最大最小高宽等样式</li>
+<li>居中时不考虑元素的padding值（也不需要使用box-sizing样式）</li>
+<li>布局块可以自由调节大小</li>
+<li>img的图像也可以使用</li>
+</ul>
+<p><strong>注意</strong>:</p>
+<ul>
+<li>必须声明元素高度</li>
+<li>推荐设置overflow:auto;样式避免元素溢出，显示不正常的问题</li>
+<li>这种方法在Windows Phone上不起作用</li>
+</ul>
+<h3 id="水平对齐"><a href="#水平对齐" class="headerlink" title="水平对齐"></a>水平对齐</h3><p>vertical-align</p>
+<h3 id="背景图设置"><a href="#背景图设置" class="headerlink" title="背景图设置"></a>背景图设置</h3><h4 id="注意：-1"><a href="#注意：-1" class="headerlink" title="注意："></a>注意：</h4><ol>
+<li>不要直接在body上设置background </li>
+</ol>
+<p><code>background-size</code> </p>
+<ul>
+<li>length: <code>background-size: 100px 200px;</code>  </li>
+<li>percentage: <code>background-size: 100% 80%;</code></li>
+<li>cover: 等比缩放</li>
+<li>contain: 适应容器</li>
+</ul>
+<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><ul>
+<li>当浏览器尺寸小于960px时候执行下面的CSS。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (max-device-width:960px)&#123; </span><br><span class="line">body&#123;background:red;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当浏览器尺寸大于960px时候执行下面的CSS。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (min-width:960px)&#123; </span><br><span class="line">body&#123;background:orange;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>我们还可以混合使用上面的用法：当页面宽度大于960px小于1200px的时候执行下面的CSS。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (min-width:960px) and (max-width:1200px)&#123;</span><br><span class="line">body&#123;background:yellow;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Media所有参数汇总</p>
+<p>以上就是我们最常需要用到的媒体查询器的三个特性，大于，等于，小于的写法。媒体查询器的全部功能肯定不止这三个功能，下面是我总结的它的一些参数用法解释：</p>
+<ul>
+<li><code>width</code>:浏览器可视宽度。</li>
+<li><code>height</code>:浏览器可视高度。</li>
+<li><code>device-width</code>:设备屏幕的宽度。</li>
+<li><code>device-height</code>:设备屏幕的高度。</li>
+<li><code>orientation</code>:检测设备目前处于横向还是纵向状态。</li>
+<li><code>aspect-ratio</code>:检测浏览器可视宽度和高度的比例。(例如：aspect-ratio:16/9)</li>
+<li><code>device-aspect-ratio</code>:检测设备的宽度和高度的比例。</li>
+<li><code>color</code>:检测颜色的位数。（例如：min-color:32就会检测设备是否拥有32位颜色）</li>
+<li><code>color-index</code>:检查设备颜色索引表中的颜色，他的值不能是负数。</li>
+<li><code>monochrome</code>:检测单色楨缓冲区域中的每个像素的位数。（这个太高级，估计咱很少会用的到）</li>
+<li><code>resolution</code>:检测屏幕或打印机的分辨率。(例如：min-resolution:300dpi或min-resolution:118dpcm)。</li>
+<li><code>grid</code>:检测输出的设备是网格的还是位图设备。</li>
+</ul>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/03/09/Javascript/Javascript中的new关键字/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/03/09/C语言学习笔记/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

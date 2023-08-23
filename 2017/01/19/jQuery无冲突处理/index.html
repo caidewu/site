@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="jQuery的无冲突处理"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>jQuery的无冲突处理 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            jQuery的无冲突处理
+            
+          </h1>
+          <p class="posted-on">
+          2017-01-19
+          </p>
+          <div class="tags-links">
+            
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <blockquote>
+<p>noConflict这个东西在prototype，mootools这些老古董基本都被淘汰的情况下，能用上的几率基本不大了，本身也是非常简单的东西，说白了就是别名替换。之所以在2017年还谈论这个东西是因为看到书上对这个东西的解释，完全是简单问题复杂化，把我看晕了，所以我看看自己想以最简单的方法把这个东西说清楚</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>当你想在项目里加入一个库，这里拿Zepto和jQuery来举例，</p>
+<p>如果项目原本没有使用过<code>window.$</code>，那么一切正常</p>
+<p>但是如果项目是非常老的项目，你只知道引入了Zepto后，页面有些功能不正常了，当你去掉Zepto后就好了，然后你在console中打印<code>$</code>,发现<code>$</code>被使用了，具体它是个什么库你也不太清楚，如果想用上Zepto怎么办？</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>显然，我需要在加载Zepto之前把<code>window.$</code>先保存起来，比如保存到变量<code>_$</code>中，然后加载Zepto后，<code>window.$</code>已经被赋值为Zepto了，这时重新给<code>window.$</code>赋上<code>_$</code>，然后用Zepto的时候，全局上就只能用别的名字，或者是把<code>$</code>写在闭包里，看下代码是怎样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  window.$ &#x3D; _$; &#x2F;&#x2F;确保_$在全局中并没有用到</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;&#x2F;cdn.bootcss.com&#x2F;zepto&#x2F;1.2.0&#x2F;zepto.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  window.$ &#x3D; _$;</span><br><span class="line">  </span><br><span class="line">  (function($) &#123;</span><br><span class="line">  	$(&#39;xxx&#39;); &#x2F;&#x2F; 在闭包里可以正常用$来表示Zepto </span><br><span class="line">  &#125;)(Zepto)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>那么实际上这就是无冲突处理</p>
+<h2 id="jQuery的做法"><a href="#jQuery的做法" class="headerlink" title="jQuery的做法"></a>jQuery的做法</h2><p>因为Zepto出来的是为移动端服务，追求的是精简，肯定不希望你加两个库做一件事，所以Zepto库里并没有集成无冲突的处理</p>
+<p>但jQuery不一样，jQuery那个年代，各种库都喜欢用<code>$</code>,所以jQuery在加载时都会先把<code>window.$</code>和<code>window.jQuery</code>存起来，然后在给<code>window.$</code>和<code>window.jQuery</code>赋上当前加载版本的jQuery，如果<code>window.$</code>在加载前已经被别的库使用了，那么jQuery提供了一个noConflict的方法，调用该方法即可把<code>window.$</code>还原回原来的</p>
+<p>看看代码是怎么用的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;&#x2F;&#x2F;cdn.bootcss.com&#x2F;jquery&#x2F;2.2.4&#x2F;jquery.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var jq &#x3D; $.noConflict(); &#x2F;&#x2F; 使用jq表示jQuery，释放$</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 或者</span><br><span class="line">  (function($) &#123;</span><br><span class="line">    $(&#39;xxx&#39;);  &#x2F;&#x2F; 在闭包里可以正常用$来表示jQuery</span><br><span class="line">  &#125;)($.noConflict());</span><br><span class="line">  </span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>以上示例仅替换了<code>window.$</code></p>
+<p>如果是想同时用两个版本的jQuery，比如先引入了1.x，然后有些地方想用2.x,那么在调用<code>$.noConflict(true)</code>即可同时替换<code>window.$</code>和<code>window.jQuery</code></p>
+<h3 id="看看jQuery源码"><a href="#看看jQuery源码" class="headerlink" title="看看jQuery源码"></a>看看jQuery源码</h3><p>global.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">var</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; Map over jQuery in case of overwrite</span><br><span class="line">	_jQuery &#x3D; window.jQuery,</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; Map over the $ in case of overwrite</span><br><span class="line">	_$ &#x3D; window.$;</span><br><span class="line"></span><br><span class="line">jQuery.noConflict &#x3D; function( deep ) &#123;</span><br><span class="line">	if ( window.$ &#x3D;&#x3D;&#x3D; jQuery ) &#123;</span><br><span class="line">		window.$ &#x3D; _$;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if ( deep &amp;&amp; window.jQuery &#x3D;&#x3D;&#x3D; jQuery ) &#123;</span><br><span class="line">		window.jQuery &#x3D; _jQuery;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return jQuery;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Expose jQuery and $ identifiers, even in AMD</span><br><span class="line">&#x2F;&#x2F; (#7102#comment:10, https:&#x2F;&#x2F;github.com&#x2F;jquery&#x2F;jquery&#x2F;pull&#x2F;557)</span><br><span class="line">&#x2F;&#x2F; and CommonJS for browser emulators (#13566)</span><br><span class="line">if ( !noGlobal ) &#123;</span><br><span class="line">	window.jQuery &#x3D; window.$ &#x3D; jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2017/02/24/DOM中的事件流/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/12/22/再来看Javascript中的原型/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

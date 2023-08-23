@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="windows键位替换"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>windows键位替换 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            windows键位替换
+            
+          </h1>
+          <p class="posted-on">
+          2016-08-25
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/键盘/" rel="tag">
+                  键盘
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>Scancode Map 注册表项来实现键盘按键映射。</p>
+<p> 位于注册表的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout\</span><br></pre></td></tr></table></figure>
+<p>新建一个二进制值项：  “Scancode Map”</p>
+<p>这个项目可实现对键盘按键的映射。这里映射的意思可理解为“替换”，可将任意一键替换成其它键。</p>
+ <a id="more"></a>
+<h2 id="先看几个简单示例"><a href="#先看几个简单示例" class="headerlink" title="先看几个简单示例"></a>先看几个简单示例</h2><ol>
+<li>屏蔽左侧WIN键<br>“Scancode Map”=00,00,00,00,00,00,00,00,02,00,00,00,00,00,5B,E0,00,00,00,00 </li>
+<li>屏蔽右侧WIN键<br>“Scancode Map”=00,00,00,00,00,00,00,00,02,00,00,00,00,00,5C,E0,00,00,00,00</li>
+<li>屏蔽左右WIN两个键<br>“Scancode Map”=00,00,00,00,00,00,00,00,03,00,00,00,00,00,5B,E0,00,00,5C,E0,00,00,00,00</li>
+<li>替换左Crtl键为左Alt键<br>“Scancode Map”=00,00,00,00,00,00,00,00,02,00,00,00,38,00,1D,00,00,00,00,00 </li>
+<li>左Crtl键为左Alt键互换<br>“Scancode Map”=00,00,00,00,00,00,00,00,03,00,00,00,38,00,1D,00,1D,00,38,00,00,00,00,00 </li>
+</ol>
+<h2 id="解释下项目格式"><a href="#解释下项目格式" class="headerlink" title="解释下项目格式"></a>解释下项目格式</h2><p>以16进制表示，更分为五个部分，每个逗号之间都为一个字节。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;Scancode Map&quot; &#x3D; 00,00,00,00,00,00,00,00,   02,00,00,00,   01,00, 02,00,    00,00,00,00</span><br></pre></td></tr></table></figure>
+<p><strong>说明:</strong></p>
+<ol>
+<li>8个字节。 这是版本信息号。照例写就好。</li>
+<li>4个字节。 这是映射键的总数。按照二进制的读写规则，低位在左，高位在右。02 00 00 00 这个数实际就是：00 00 00 02 。从 02 开始，一个映射键是 02 ，两个是03 ，依次递加，十个是 0B 。</li>
+<li>2个字节。 表示替换后按键的”扫描码“。如：ESC 键的扫描码是 01 ，所以就表示 01 00 。再如 左Ctrl键扫描码是 1D 00, 而右Ctrl键是 1D E0 。</li>
+<li>2个字节。 表示原按键的”扫描码“。格式同上。</li>
+<li>以四个 00 结束。</li>
+</ol>
+<h2 id="键盘扫描码"><a href="#键盘扫描码" class="headerlink" title="键盘扫描码"></a>键盘扫描码</h2><p>以十六进制表示，分两部份，0X后面两个数是扫描码，最后两个数是 ASCII 码（可忽略）。如　0x011b          ESC　扫描码是01。</p>
+<table>
+<thead>
+<tr>
+<th>扫描码</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0X011B</td>
+<td>ESC </td>
+</tr>
+<tr>
+<td>0X3B00</td>
+<td>F1 </td>
+</tr>
+<tr>
+<td>0X3C00</td>
+<td>F2 </td>
+</tr>
+<tr>
+<td>0X3D00</td>
+<td>F3 </td>
+</tr>
+<tr>
+<td>0X3E00</td>
+<td>F4 </td>
+</tr>
+<tr>
+<td>0X3F00</td>
+<td>F5 </td>
+</tr>
+<tr>
+<td>0X4000</td>
+<td>F6 </td>
+</tr>
+<tr>
+<td>0X4100</td>
+<td>F7 </td>
+</tr>
+<tr>
+<td>0X4200</td>
+<td>F8 </td>
+</tr>
+<tr>
+<td>0X4300</td>
+<td>F9 </td>
+</tr>
+<tr>
+<td>0X4400</td>
+<td>F10</td>
+</tr>
+</tbody>
+</table>
+<p>主键盘区: </p>
+<table>
+<thead>
+<tr>
+<th>扫描码</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0X2960</td>
+<td>~ </td>
+</tr>
+<tr>
+<td>0X0231</td>
+<td>1 </td>
+</tr>
+<tr>
+<td>0X0332</td>
+<td>2 </td>
+</tr>
+<tr>
+<td>0X0433</td>
+<td>3 </td>
+</tr>
+<tr>
+<td>0X0534</td>
+<td>4 </td>
+</tr>
+<tr>
+<td>0X0635</td>
+<td>5 </td>
+</tr>
+<tr>
+<td>0X0736</td>
+<td>6 </td>
+</tr>
+<tr>
+<td>0X0837</td>
+<td>7 </td>
+</tr>
+<tr>
+<td>0X0938</td>
+<td>8 </td>
+</tr>
+<tr>
+<td>0X0A39</td>
+<td>9 </td>
+</tr>
+<tr>
+<td>0X0B30</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>0X0C2D</td>
+<td>- </td>
+</tr>
+<tr>
+<td>0X0D3D</td>
+<td>= </td>
+</tr>
+<tr>
+<td>0X2B5C</td>
+<td>“ </td>
+</tr>
+<tr>
+<td>0X0E08</td>
+<td>退格键 </td>
+</tr>
+<tr>
+<td>0X0F09</td>
+<td>TAB </td>
+</tr>
+<tr>
+<td>0X1071</td>
+<td>Q </td>
+</tr>
+<tr>
+<td>0X1177</td>
+<td>W </td>
+</tr>
+<tr>
+<td>0X1265</td>
+<td>E </td>
+</tr>
+<tr>
+<td>0X1372</td>
+<td>R </td>
+</tr>
+<tr>
+<td>0X1474</td>
+<td>T </td>
+</tr>
+<tr>
+<td>0X1579</td>
+<td>Y </td>
+</tr>
+<tr>
+<td>0X1675</td>
+<td>U </td>
+</tr>
+<tr>
+<td>0X1769</td>
+<td>I </td>
+</tr>
+<tr>
+<td>0X186F</td>
+<td>O </td>
+</tr>
+<tr>
+<td>0X1970</td>
+<td>P </td>
+</tr>
+<tr>
+<td>0X1A5B</td>
+<td>[ </td>
+</tr>
+<tr>
+<td>0X1B5D</td>
+<td>] </td>
+</tr>
+<tr>
+<td>0X1E61</td>
+<td>A </td>
+</tr>
+<tr>
+<td>0X1F73</td>
+<td>S </td>
+</tr>
+<tr>
+<td>0X2064</td>
+<td>D </td>
+</tr>
+<tr>
+<td>0X2166</td>
+<td>F </td>
+</tr>
+<tr>
+<td>0X2267</td>
+<td>G </td>
+</tr>
+<tr>
+<td>0X2368</td>
+<td>H </td>
+</tr>
+<tr>
+<td>0X246A</td>
+<td>J </td>
+</tr>
+<tr>
+<td>0X256B</td>
+<td>K </td>
+</tr>
+<tr>
+<td>0X266C</td>
+<td>L </td>
+</tr>
+<tr>
+<td>0X273B</td>
+<td>; </td>
+</tr>
+<tr>
+<td>0X2827</td>
+<td>‘ </td>
+</tr>
+<tr>
+<td>0X1C0D</td>
+<td>回车 </td>
+</tr>
+<tr>
+<td>0X2C7A</td>
+<td>Z </td>
+</tr>
+<tr>
+<td>0X2D78</td>
+<td>X </td>
+</tr>
+<tr>
+<td>0X2E63</td>
+<td>C </td>
+</tr>
+<tr>
+<td>0X2F76</td>
+<td>V </td>
+</tr>
+<tr>
+<td>0X3062</td>
+<td>B </td>
+</tr>
+<tr>
+<td>0X316E</td>
+<td>N </td>
+</tr>
+<tr>
+<td>0X326D</td>
+<td>M </td>
+</tr>
+<tr>
+<td>0X332C</td>
+<td>, </td>
+</tr>
+<tr>
+<td>0X342E</td>
+<td>. </td>
+</tr>
+<tr>
+<td>0X352F</td>
+<td>/ </td>
+</tr>
+<tr>
+<td>0X3920</td>
+<td>空格键</td>
+</tr>
+</tbody>
+</table>
+<p>右边数字键盘: </p>
+<table>
+<thead>
+<tr>
+<th>扫描码</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0X5200</td>
+<td>INSERT </td>
+</tr>
+<tr>
+<td>0X4700</td>
+<td>HOME </td>
+</tr>
+<tr>
+<td>0X4900</td>
+<td>PAGE UP </td>
+</tr>
+<tr>
+<td>0X5300</td>
+<td>DELETE </td>
+</tr>
+<tr>
+<td>0X4F00</td>
+<td>END </td>
+</tr>
+<tr>
+<td>0X5100</td>
+<td>PAGEDOWN </td>
+</tr>
+<tr>
+<td>0X4800</td>
+<td>上箭头 </td>
+</tr>
+<tr>
+<td>0X4B00</td>
+<td>左箭头 </td>
+</tr>
+<tr>
+<td>0X5000</td>
+<td>下箭头 </td>
+</tr>
+<tr>
+<td>0X4D00</td>
+<td>右箭头 </td>
+</tr>
+<tr>
+<td>0X352F</td>
+<td>/ </td>
+</tr>
+<tr>
+<td>0X372A</td>
+<td>* </td>
+</tr>
+<tr>
+<td>0X4A2D</td>
+<td>- (注意,这是数字键盘的)</td>
+</tr>
+<tr>
+<td>0X4737</td>
+<td>7 </td>
+</tr>
+<tr>
+<td>0X4838</td>
+<td>8 </td>
+</tr>
+<tr>
+<td>0X4939</td>
+<td>9 </td>
+</tr>
+<tr>
+<td>0X4B34</td>
+<td>4 </td>
+</tr>
+<tr>
+<td>0X4C35</td>
+<td>5 </td>
+</tr>
+<tr>
+<td>0X4D36</td>
+<td>6 </td>
+</tr>
+<tr>
+<td>0X4E2B</td>
+<td>+ </td>
+</tr>
+<tr>
+<td>0X4F31</td>
+<td>1 </td>
+</tr>
+<tr>
+<td>0X5032</td>
+<td>2 </td>
+</tr>
+<tr>
+<td>0X5133</td>
+<td>3 </td>
+</tr>
+<tr>
+<td>0X5230</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>0X532E</td>
+<td>DEL</td>
+</tr>
+</tbody>
+</table>
+<p>左 Crtl 扫描码是 1D ，表示 1D 00 。 右 Ctrl 键扫描码是 E01D，表示 1D E0。</p>
+<p>左 ALT 扫描码是 38 ，表示 38 00 。 右 ALT 键扫描码是 E0 38，表示 38 E0。</p>
+<p>左 Shift 扫描码是 2A ，表示 2A 00 。 右 Shift 键扫描码是 36 ，表示 36 00</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/09/08/前端代码风格/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/08/18/zepto的extend/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

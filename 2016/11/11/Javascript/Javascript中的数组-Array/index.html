@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="Javascript中的数组-Array"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>Javascript中的数组-Array - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            Javascript中的数组-Array
+            
+          </h1>
+          <p class="posted-on">
+          2016-11-11
+          </p>
+          <div class="tags-links">
+            
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <blockquote>
+<p>本文主要供平时健忘症发作的时候查阅, 详细的可以参考这个<a href="http://javascript.ruanyifeng.com/stdlib/array.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/stdlib/array.html</a></p>
+</blockquote>
+<h2 id="操作当前数组"><a href="#操作当前数组" class="headerlink" title="操作当前数组"></a>操作当前数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pop()		&#x2F;&#x2F; 从尾部去掉</span><br><span class="line">push()		&#x2F;&#x2F; 从尾部加入</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">unshift(insert1,insert2…insertN)     &#x2F;&#x2F;从头部加入，不支持ie</span><br><span class="line">shift()         &#x2F;&#x2F;从头部删除</span><br><span class="line"></span><br><span class="line">sort(sortby)		&#x2F;&#x2F; sortby非必填</span><br><span class="line"></span><br><span class="line">reverse()     &#x2F;&#x2F;反转数组</span><br><span class="line"></span><br><span class="line">splice(index,howmany,insert1,insert2…insertN)</span><br><span class="line">&#x2F;&#x2F; insert非必填</span><br><span class="line">&#x2F;&#x2F; 返回值是切割出来新的数组，</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="返回新数组"><a href="#返回新数组" class="headerlink" title="返回新数组"></a>返回新数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">concat(arr1,arr2…..arrN);</span><br><span class="line"></span><br><span class="line">slice(start,end)		&#x2F;&#x2F; start参数可以为负，即重数组尾部开始, end可以为任何</span><br></pre></td></tr></table></figure>
+<h2 id="返回字符串"><a href="#返回字符串" class="headerlink" title="返回字符串"></a>返回字符串</h2><p>join(分隔符)</p>
+<h2 id="继承Object的方法"><a href="#继承Object的方法" class="headerlink" title="继承Object的方法"></a>继承Object的方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">toLocaleString()</span><br><span class="line">toString()</span><br><span class="line">valueOf()</span><br><span class="line">toSource() &#x2F;&#x2F;仅Gecko内核支持</span><br></pre></td></tr></table></figure>
+<h2 id="ES5新特性"><a href="#ES5新特性" class="headerlink" title="ES5新特性"></a>ES5新特性</h2><h3 id="没有返回值"><a href="#没有返回值" class="headerlink" title="没有返回值"></a>没有返回值</h3><ul>
+<li>forEach    // 枚举数组，没有返回值，这个不用举例子了</li>
+</ul>
+<h3 id="返回索引值"><a href="#返回索引值" class="headerlink" title="返回索引值"></a>返回索引值</h3><ul>
+<li>indexOf    </li>
+<li>lastIndexOf: 过程和indexOf不一样，从后往前计算，结果是一样的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;];</span><br><span class="line">arr.indexOf(&#39;c&#39;); &#x2F;&#x2F; 2</span><br></pre></td></tr></table></figure>
+<h3 id="返回Boolean值"><a href="#返回Boolean值" class="headerlink" title="返回Boolean值"></a>返回Boolean值</h3><ul>
+<li>some    // 任意一项为true，即返回true</li>
+<li>every    // 所有项都为true，才返回true</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F; some方法 判断数组内的是否存在一个大于等于3的元素</span><br><span class="line">var arr &#x3D; [1, 2, 3, 4, 5];</span><br><span class="line">var ret &#x3D; arr.some(function (elem, index, arr) &#123;</span><br><span class="line">  return elem &gt;&#x3D; 3;</span><br><span class="line">&#125;);</span><br><span class="line">console.log(ret); &#x2F;&#x2F; true</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; every方法 比较两个数组内容是否相同</span><br><span class="line">var arr1 &#x3D; [1, 2, 3, 4, 5];</span><br><span class="line">var ret &#x3D; arr.length &#x3D;&#x3D;&#x3D; arr1.length &amp;&amp; </span><br><span class="line">arr.every(function (elem, index, arr) &#123;</span><br><span class="line">  return elem &#x3D;&#x3D;&#x3D; arr1[index];</span><br><span class="line">&#125;);</span><br><span class="line">console.log(ret); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<h3 id="返回一个新的数组"><a href="#返回一个新的数组" class="headerlink" title="返回一个新的数组"></a>返回一个新的数组</h3><ul>
+<li>reduce // 选代数组所有项，然后构建一个最终返回的值</li>
+<li>reduceRight</li>
+</ul>
+<p>reduce方法接收两个参数，第一个是回调函数，第二个参数则是指定返回的第一个prev是什么值</p>
+<p>例如：获取一个Number数组的和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[1,3,5,7].reduce(function(prev,current) &#123;</span><br><span class="line">	return prev + current;</span><br><span class="line">&#125;, 0);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 返回值为： 16</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr.reduce(function(prev,cur,index,array)&#123;</span><br><span class="line">        return prev+cur;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>filter: 过滤符合回调中的条件的数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4, 5].filter(function (elem) &#123;</span><br><span class="line">  return (elem &gt; 3);</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; [4, 5]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>map: 对数组的所有成员依次执行回调函数，根据函数结果返回一个新数组。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].map(function(elem, index, arr) &#123;</span><br><span class="line">  return elem * index;</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F; [0, 2, 6]</span><br></pre></td></tr></table></figure>
+<h2 id="ES2015新特性"><a href="#ES2015新特性" class="headerlink" title="ES2015新特性"></a>ES2015新特性</h2><p>// TODO</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/12/12/使用node来完成文件的批处理/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/11/11/Flex布局学习笔记/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

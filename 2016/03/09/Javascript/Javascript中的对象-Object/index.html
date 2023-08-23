@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="Javascript中Object是所有对象的祖宗，所有对象都继承自它，而它本身也是一个构造函数，可以直接生成或包装对象">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="Javascript中的对象-Object"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="Javascript中Object是所有对象的祖宗，所有对象都继承自它，而它本身也是一个构造函数，可以直接生成或包装对象" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>Javascript中的对象-Object - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            Javascript中的对象-Object
+            
+          </h1>
+          <p class="posted-on">
+          2016-03-09
+          </p>
+          <div class="tags-links">
+            
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <blockquote>
+<p>Javascript中Object是所有对象的祖宗，所有对象都继承自它，而它本身也是一个构造函数，可以直接生成或包装对象</p>
+</blockquote>
+<h2 id="Object对象的方法"><a href="#Object对象的方法" class="headerlink" title="Object对象的方法"></a>Object对象的方法</h2><p>当Object 被作为工具方法，而不是构造方法时，</p>
+<ul>
+<li>Object(arg)：包装方法，将非对象类型包装成一个对象</li>
+<li>Object.create(proto[, propertiesObject])：</li>
+<li>Object.getPrototypeOf(obj)：</li>
+</ul>
+<h2 id="Object实例对象的方法"><a href="#Object实例对象的方法" class="headerlink" title="Object实例对象的方法"></a>Object实例对象的方法</h2><p>必须区分“构造函数的方法”和“实例对象的方法”。</p>
+<ul>
+<li>valueOf()：返回当前对象对应的值。</li>
+<li>toString()：返回当前对象对应的字符串形式。<br>这个方法很有用，可以用于判断对象类型</li>
+<li>toLocalString()：返回当前对象对应的本地字符串形式。</li>
+<li>hasOwnProperty()：判断某个属性是否为当前对象自身的属性，还是继承自原型对象的属性。</li>
+<li>isPrototypeOf()：判断当前对象是否为另一个对象的原型。</li>
+<li>propertyIsEnumerable()：判断某个属性是否可枚举。</li>
+</ul>
+<h2 id="对象的属性模型"><a href="#对象的属性模型" class="headerlink" title="对象的属性模型"></a>对象的属性模型</h2><ul>
+<li>Object.getOwnPropertyDescriptor()：获取对象的属性的精确描述模型</li>
+</ul>
+<p>Object.defineProperty()<br>Object.defineProperties()<br>这两个方法有性能损耗，会拖慢执行速度，不宜大量使用。</p>
+<h3 id="可枚举性（enumerable）"><a href="#可枚举性（enumerable）" class="headerlink" title="可枚举性（enumerable）"></a>可枚举性（enumerable）</h3><p>如果一个属性的enumerable为false，下面三个操作不会取到该属性。</p>
+<blockquote>
+<p>for..in循环<br>Object.keys方法<br>JSON.stringify方法(有时可以利用这一点，为对象添加注释信息。)</p>
+</blockquote>
+<p>因此，enumerable可以用来设置“秘密”属性。<br>遍历对象属性方法</p>
+<ul>
+<li><code>Object.keys()</code> </li>
+<li><code>Object.getOwnPropertyNames()</code><br>一般情况下，几乎总是使用Object.keys方法，遍历数组的属性。</li>
+</ul>
+<h3 id="存取器"><a href="#存取器" class="headerlink" title="存取器"></a>存取器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var o &#x3D;&#123;</span><br><span class="line">  $n : 5,</span><br><span class="line">  get next()&#123;return this.$n++ &#125;,</span><br><span class="line">  set next(n) &#123;</span><br><span class="line">    if (n &gt;&#x3D; this.$n) this.$n &#x3D; n;</span><br><span class="line">    else throw &quot;新的值必须大于当前值&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">o.next &#x2F;&#x2F; 5</span><br><span class="line"></span><br><span class="line">o.next &#x3D; 10;</span><br><span class="line">o.next &#x2F;&#x2F; 10</span><br></pre></td></tr></table></figure>
+<p>利用存取器，可以实现数据对象与DOM对象的双向绑定。</p>
+<h3 id="对象拷贝"><a href="#对象拷贝" class="headerlink" title="对象拷贝"></a>对象拷贝</h3><p>对于简单属性，就直接拷贝，对于那些通过描述对象设置的属性，则使用Object.defineProperty方法拷贝。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var extend &#x3D; function (to, from) &#123;</span><br><span class="line">  var descriptor &#x3D; Object.getOwnPropertyDescriptor(from, property);</span><br><span class="line"></span><br><span class="line">  if (descriptor &amp;&amp; ( !descriptor.writable</span><br><span class="line">    || !descriptor.configurable</span><br><span class="line">    || !descriptor.enumerable</span><br><span class="line">    || descriptor.get</span><br><span class="line">    || descriptor.set)) &#123;</span><br><span class="line">    Object.defineProperty(to, property, descriptor);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    to[property] &#x3D; from[property];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="控制对象状态"><a href="#控制对象状态" class="headerlink" title="控制对象状态"></a>控制对象状态</h2><p>JavaScript提供了三种方法，精确控制一个对象的读写状态，防止对象被改变。最弱一层的保护是preventExtensions，其次是seal，最强的freeze。</p>
+<h4 id="不可扩展对象-不能加，可改，可删"><a href="#不可扩展对象-不能加，可改，可删" class="headerlink" title="不可扩展对象(不能加，可改，可删)"></a>不可扩展对象(不能加，可改，可删)</h4><p>Object.preventExtensions方法可以使得一个对象无法再添加新的属性。可以用delete命令删除它的现有属性。<br>判断： Object.isExtensible(obj);</p>
+<h4 id="密封的对象（不能加，删，可改）"><a href="#密封的对象（不能加，删，可改）" class="headerlink" title="密封的对象（不能加，删，可改）"></a>密封的对象（不能加，删，可改）</h4><p>Object.seal方法使得一个对象既无法添加新属性，也无法删除旧属性。</p>
+<p>判断： Object.isSealed(obj);</p>
+<h4 id="冻结的对象（不能加，不能改，不能删）"><a href="#冻结的对象（不能加，不能改，不能删）" class="headerlink" title="冻结的对象（不能加，不能改，不能删）"></a>冻结的对象（不能加，不能改，不能删）</h4><p>Object.freeze方法可以使得一个对象无法添加新属性、无法删除旧属性、也无法改变属性的值，使得这个对象实际上变成了常量。<br>判断： Object.isFrozen(obj);</p>
+<p><strong>局限性</strong>: 需要注意的是，使用上面这些方法锁定对象的可写性，但是依然可以通过改变该对象的原型对象，来为它增加属性。</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/03/17/正则表达式整理/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/03/09/Javascript/Javascript中的prototype/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

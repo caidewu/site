@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="再来说Javascript中的原型"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>再来说Javascript中的原型 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            再来说Javascript中的原型
+            
+          </h1>
+          <p class="posted-on">
+          2016-12-22
+          </p>
+          <div class="tags-links">
+            
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h2 id="toString是从哪来的"><a href="#toString是从哪来的" class="headerlink" title="toString是从哪来的"></a>toString是从哪来的</h2><p>先来看一段代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var obj &#x3D; &#123;&#125;;</span><br><span class="line">console.log(obj.toString()); &#x2F;&#x2F; 结果是：&quot;[object Object]&quot;</span><br></pre></td></tr></table></figure>
+<p>这段代码很简单，一个对象调用了toString方法，但是如果我问你为什么可以调toString方法？toString是从哪来的？</p>
+<p>对于大多学过几天js的人知道，因为obj是继承了Object对象，而toString是Object对象的方法，所以obj可以调toString</p>
+<p>那么很明显，这个回答是正确的错误答案，因为关键字没有说到：<strong>原型</strong></p>
+<a id="more"></a>
+<h2 id="原型是什么？"><a href="#原型是什么？" class="headerlink" title="原型是什么？"></a>原型是什么？</h2><p>首先，原型是一个<strong>普通</strong>的对象。</p>
+<p>为什么说是普通，说明一定有不普通的对象，比如function类型的对象，它就属于不太普通的对象，这个后面说</p>
+<p>在js的世界里，一个普通对象是怎么样</p>
+<ol>
+<li>对象上可以定义方法或属性</li>
+<li>对象一定有一个原型</li>
+<li>对象的原型上的方法和属性，对象本身可以通过<code>.</code>语法获取，就像调用自己的方法和属性一样</li>
+<li>对象的原型是指向其构造函数的prototye属性的指针（引用）</li>
+<li>对象本身的方法或属性会覆盖掉原型上的方法或属性</li>
+</ol>
+<p>一个对象一定有一个原型，而原型又是一个对象，那么原型上就会有原型，这个原型依旧是对象，而这个对象依旧有原型，这样不停往上追溯，直到js的根对象Object.prototype，这个就叫<strong>原型链</strong></p>
+<p>实际上每个对象都有一个存放原型的内部属性 <code>[[prototype]]</code>（实际上看不到，ecma的标准里是这么描述的）, 而在浏览器环境中，提供了一个叫<code>__proto__</code>的属性去访问它，下面就通过<code>__proto__</code>去看看原型链是是怎么链起来的</p>
+<p>先来看一个空对象的原型是怎样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var obj &#x3D; &#123;&#125;; &#x2F;&#x2F; 一个空对象，等同于 new Object()</span><br><span class="line"></span><br><span class="line">obj.__proto__ &#x3D;&#x3D;&#x3D; Object.prototype; &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<p><code>obj.__proto__</code>是obj对象原型，Object是obj对象的构造函数，<br>对象的原型是指向其构造函数的prototye属性的指针，所以结果是true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.__proto__.__proto__ &#x3D;&#x3D;&#x3D; null;		&#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<p><code>Object.prototype</code>是最基本的原型，但是它仍然是个对象，所以，它还是有原型的，它的原型一个空对象null，js就是这么定义的,这里不必深究</p>
+<p>上面这个例子因为构造函数就是Object，所以直接就到Object.prototype,没有表现出原型链的样子，下面进入正题</p>
+<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>通常我们使用的对象并不是使用Object这个构造函数生成的，而是我们自己定义的构造函数，构造函数其实就是函数，而函数其实也是对象，就是前面说的那个不太普通的对象。</p>
+<p>函数对象上拥有一个特殊的属性prototype，其实前面已经有写到（Object.prototype），它就是用来定义存放原型的地方</p>
+<p>js中，因为没有类的概念，所以是构造函数承担类的功能，去定义对象的属性和方法，去实现继承，下面的代码是三个构造函数继承的关系<br><br>Tips继承了Dialog，<br><br>Dialog继承了Modal，<br><br>Modal并没有说明继承了什么，实际上就是继承了Object，通过这种具有继承关系的构造函数，我们可以清晰的看出原型链的形成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Modal 是弹窗，有宽，高和内容</span><br><span class="line"> * Dialog  是对话框， 有宽高，内容 还有一个按钮</span><br><span class="line"> * Tips   是一个提示对话框， 有宽高，内容， 按钮，还有一个标题栏</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">function Modal(height, width, content) &#123;</span><br><span class="line">    this.height &#x3D; height;</span><br><span class="line">    this.width &#x3D; width;</span><br><span class="line">    this.content &#x3D; content;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Modal.prototype.open &#x3D; function () &#123;</span><br><span class="line">    console.log(&#39;width:&#39; + this.width + &#39; ,height:&#39; + this.height + &#39; ,content:&#39; + this.content);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function Dialog(height, width, content, button) &#123;</span><br><span class="line">    Modal.apply(this, arguments);</span><br><span class="line">    this.button &#x3D; button;</span><br><span class="line">&#125;</span><br><span class="line">Dialog.prototype &#x3D; Object.create(Modal.prototype);</span><br><span class="line">Dialog.prototype.constructor &#x3D; Dialog;</span><br><span class="line">Dialog.prototype.showButton &#x3D; function () &#123;</span><br><span class="line">    console.log(&#39;button:&#39; + this.button)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function Tips(height, width, content, button, title) &#123;</span><br><span class="line">    Dialog.apply(this, arguments);</span><br><span class="line">    this.title &#x3D; title;</span><br><span class="line">&#125;</span><br><span class="line">Tips.prototype &#x3D; Object.create(Dialog.prototype);</span><br><span class="line">Tips.prototype.constructor &#x3D; Tips;</span><br><span class="line">Tips.prototype.showTitle &#x3D; function () &#123;</span><br><span class="line">    console.log(&#39;title:&#39; + this.title)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; *&#x2F;</span><br><span class="line"></span><br><span class="line">var tips &#x3D; new Tips(100,200,&#39;233333&#39;,&#39;ok&#39;,&#39;warn&#39;);</span><br><span class="line"></span><br><span class="line">console.log(tips.__proto__ &#x3D;&#x3D;&#x3D; Tips.prototype);                                     &#x2F;&#x2F; true</span><br><span class="line">console.log(tips.__proto__.__proto__ &#x3D;&#x3D;&#x3D; Dialog.prototype);                         &#x2F;&#x2F; true</span><br><span class="line">console.log(tips.__proto__.__proto__.__proto__ &#x3D;&#x3D;&#x3D; Modal.prototype);                &#x2F;&#x2F; true</span><br><span class="line">console.log(tips.__proto__.__proto__.__proto__.__proto__ &#x3D;&#x3D;&#x3D; Object.prototype);     &#x2F;&#x2F; true</span><br><span class="line">console.log(tips.__proto__.__proto__.__proto__.__proto__.__proto__ &#x3D;&#x3D;&#x3D; null);       &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<p>tips对象的原型就是其构造函数Tips的属性prototype定义了一个对象，这个对象定义了constructor指向Tips，定义了showTitle方法；<br><br>同时通过create方法继承了构造函数Dialog的原型（Dialog.prototype），得到了showButton方法；<br><br>Dialog又继承了Modal的原型(Modal.prototype)，所以得到open方法；<br><br>Modal继承Object的原型(Object.prototype)，所以得到下面列一个Object原型上的属性和方法</p>
+<ul>
+<li><code>__defineGetter__</code></li>
+<li><code>__defineSetter__</code></li>
+<li><code>hasOwnProperty</code></li>
+<li><code>__lookupGetter__</code></li>
+<li><code>__lookupSetter__</code></li>
+<li><code>propertyIsEnumerable</code></li>
+<li><code>constructor</code></li>
+<li><code>toString</code></li>
+<li><code>toLocaleString</code></li>
+<li><code>valueOf</code></li>
+<li><code>isPrototypeOf</code></li>
+<li><code>__proto__</code></li>
+</ul>
+<p>由于<strong>对象的原型上的方法和属性，对象本身可以通过<code>.</code>语法获取</strong>，所以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tips.open();	&#x2F;&#x2F; width:200 ,height:100 ,content:233333</span><br><span class="line">tips.showButton();  &#x2F;&#x2F; button:ok</span><br><span class="line">tips.showTitle();	&#x2F;&#x2F; title:warn</span><br><span class="line">tips.toString();    &#x2F;&#x2F; [object Object]</span><br></pre></td></tr></table></figure>
+<h2 id="优先级问题"><a href="#优先级问题" class="headerlink" title="优先级问题"></a>优先级问题</h2><p>如果在Tips上定义的属性和原型链上的重复？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Tips.prototype.toString &#x3D; function() &#123; console.log(&#39;new toString&#39;)&#125;</span><br><span class="line"></span><br><span class="line">tips.toString(); &#x2F;&#x2F; new toString</span><br></pre></td></tr></table></figure>
+<p>原型链底下的会覆盖掉原型链顶上的的属性或方法。这也是很合理的</p>
+<p>优先级最高的则是对象本身的的属性，即<strong>对象本身的方法或属性会覆盖掉原型上的方法或属性</strong></p>
+<p>当一个对象调用一个属性或方法时，js解释器会先在当前对象上扫描是否有该属性，如果没有，才会到这个对象的原型上找，如果，还是没有，就到原型的原型上找，最后，直至Object.prototype,还是没有的话，就返回undefined</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2017/01/19/jQuery无冲突处理/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/12/22/浏览器缓存测试情况/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

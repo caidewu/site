@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="Mac批量设置视频文件默认打开方式为Movist"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>Mac批量设置视频文件默认打开方式为Movist - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            Mac批量设置视频文件默认打开方式为Movist
+            
+          </h1>
+          <p class="posted-on">
+          2016-07-21
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/mac使用经验/" rel="tag">
+                  mac使用经验
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h1 id="Mac批量设置视频文件默认打开方式为Movist"><a href="#Mac批量设置视频文件默认打开方式为Movist" class="headerlink" title="Mac批量设置视频文件默认打开方式为Movist"></a>Mac批量设置视频文件默认打开方式为Movist</h1><p>在Mac中播放视频软件最好的，应当属于Movist，但是Movist中我并没有找到将其作为视频的默认播放器设置</p>
+<p>而Mac单独设置一类文件作为默认打开方式可以这样做：</p>
+<blockquote>
+<p>文件名右键 -&gt; 显示简介 -&gt; 打开方式 -&gt; 全部更改</p>
+</blockquote>
+<p>但是，这样一个个类型的修改比较麻烦，有没有更好的办法？</p>
+<p>当然是有的    </p>
+<h2 id="快速配置"><a href="#快速配置" class="headerlink" title="快速配置"></a>快速配置</h2><h3 id="安装duti"><a href="#安装duti" class="headerlink" title="安装duti"></a>安装duti</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install duti</span><br></pre></td></tr></table></figure>
+<p>如果brew都没有，执行下面命令安装brew</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="配置常见视频使用Movist打开"><a href="#配置常见视频使用Movist打开" class="headerlink" title="配置常见视频使用Movist打开"></a>配置常见视频使用Movist打开</h3><p>不需要知道原理的可以直接打开终端（shell），执行一下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">duti -s com.movist.movist public.movie viewer</span><br><span class="line">duti -s com.movist.movist public.avi viewer</span><br><span class="line">duti -s com.movist.movist public.mpeg viewer</span><br><span class="line">duti -s com.movist.movist public.mpeg-4 viewer</span><br><span class="line">duti -s com.movist.movist public.3gpp viewer</span><br><span class="line">duti -s com.movist.movist public.3gpp2 viewer</span><br><span class="line">duti -s com.movist.movist com.apple.quicktime-movie viewer</span><br><span class="line">duti -s com.movist.movist com.real.realmedia viewer</span><br><span class="line">duti -s com.movist.movist com.adobe.flash.video viewer</span><br></pre></td></tr></table></figure>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="Bundle-ID"><a href="#Bundle-ID" class="headerlink" title="Bundle ID"></a>Bundle ID</h3><p>Bundle ID (应用标识符)) 是 iOS 或者 Mac 应用的唯一标识.</p>
+<p><code>com.movist.movist</code>就是Movist的Bundle ID</p>
+<p>那么，怎么看一个应用的Bundle ID ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">osascript -e &#39;id of app &quot;Finder&quot;&#39;</span><br><span class="line"></span><br><span class="line">osascript -e &#39;id of app &quot;Movist&quot;&#39;</span><br></pre></td></tr></table></figure>
+<h3 id="UTI（Uniform-Type-Identifiers）"><a href="#UTI（Uniform-Type-Identifiers）" class="headerlink" title="UTI（Uniform Type Identifiers）"></a>UTI（Uniform Type Identifiers）</h3><p>有了Bundle ID，还需要UTI，其实可以理解为文件类型标示，类似后缀名，但不是后缀名，苹果系统是通过文件的UTI关联的是那个应用，然后会通过关联的应用来打开这个文件，当然后缀名和这个东西也是有某种关联关系的，这里暂不讨论</p>
+<p><strong>怎么看？</strong></p>
+<ul>
+<li>苹果的网站上有列出一些</li>
+</ul>
+<blockquote>
+<p><a href="https://developer.apple.com/library/mac/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html" target="_blank" rel="noopener">https://developer.apple.com/library/mac/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html</a></p>
+</blockquote>
+<ul>
+<li>通过mdls命令查看,看</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Movies  &gt;mdls IMG_2436.MP4</span><br></pre></td></tr></table></figure>
+<p>kMDItemContentType，kMDItemContentTypeTree就是UTI，kMDItemContentType优先</p>
+<h3 id="开始实践"><a href="#开始实践" class="headerlink" title="开始实践"></a>开始实践</h3><p>简单说，就是通过duti命令来查看和关联文件和打开应用</p>
+<h4 id="查看UTI关联的应用："><a href="#查看UTI关联的应用：" class="headerlink" title="查看UTI关联的应用："></a>查看UTI关联的应用：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">duti -d public.movie</span><br></pre></td></tr></table></figure>
+<h4 id="配置一个public-movie类型的文件关联movist"><a href="#配置一个public-movie类型的文件关联movist" class="headerlink" title="配置一个public.movie类型的文件关联movist"></a>配置一个public.movie类型的文件关联movist</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">duti -s com.movist.movist public.movie viewer</span><br></pre></td></tr></table></figure>
+<p><strong>详细参数说明</strong></p>
+<ul>
+<li>-s : 选项会让 duti 从命令行读参数.</li>
+<li>-x ext : 选项会让 duti 输出参数中扩展名对应的默认应用</li>
+<li>-d uti : 打印 UTI 的默认应用.</li>
+<li>-l uti : 打印 UTI 的所有可用应用.</li>
+<li>-V: 打印版本.</li>
+<li>-v: 详细输出.</li>
+<li>-h: 帮助.</li>
+</ul>
+<h4 id="通过读取文件配置"><a href="#通过读取文件配置" class="headerlink" title="通过读取文件配置"></a>通过读取文件配置</h4><p>使用 -s 选项, 从命令行读取参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">duti -s com.apple.Safari public.html all</span><br><span class="line">duti -s com.apple.Finder ftp</span><br></pre></td></tr></table></figure>
+<p>如果配置项特别多可以把配置保存到文本文件中，方面以后编辑管理，格式如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">com.movist.movist public.movie viewer</span><br><span class="line">com.movist.movist public.avi viewer</span><br><span class="line">com.movist.movist public.mpeg viewer</span><br><span class="line">com.movist.movist public.mpeg-4 viewer</span><br><span class="line">com.movist.movist com.microsoft.win dows-​media-wm viewer</span><br><span class="line">com.movist.movist com.microsoft.windows-​media-wmv viewer</span><br><span class="line">com.movist.movist com.microsoft.windows-​media-wmp viewer</span><br><span class="line">com.movist.movist public.3gpp viewer</span><br><span class="line">com.movist.movist public.3gpp2 viewer</span><br><span class="line">com.movist.movist com.apple.quicktime-movie viewer</span><br><span class="line">com.movist.movist com.real.realmedia viewer</span><br><span class="line">com.movist.movist com.adobe.flash.video viewer</span><br></pre></td></tr></table></figure>
+<p>比如就保存叫 <code>duti-files</code>, 然后执行duti命令，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">duti duti-files</span><br></pre></td></tr></table></figure>
+<p>即可完成格式的关联</p>
+<h2 id="其他文件格式关联"><a href="#其他文件格式关联" class="headerlink" title="其他文件格式关联"></a>其他文件格式关联</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># *.md</span><br><span class="line">duti -s com.uranusjr.macdown net.daringfireball.markdown all</span><br><span class="line"></span><br><span class="line"># 音频格式关联</span><br><span class="line"># *.flac				</span><br><span class="line">duti -s com.coppertino.Vox dyn.ah62d4rv4ge80q5dbqq all</span><br><span class="line"></span><br><span class="line"># *.mp3</span><br><span class="line">duti -s com.coppertino.Vox public.mp3 all</span><br><span class="line"></span><br><span class="line"># *.m4a</span><br><span class="line">duti -s com.coppertino.Vox com.apple.m4a-audio all</span><br><span class="line"></span><br><span class="line"># *.ape</span><br><span class="line">duti -s com.coppertino.Vox dyn.ah62d4rv4ge80c6df all</span><br><span class="line"></span><br><span class="line"># *.cue</span><br><span class="line">duti -s com.coppertino.Vox com.coppertino.vox.cue all</span><br><span class="line"></span><br><span class="line"># *.wav</span><br><span class="line">duti -s com.coppertino.Vox com.microsoft.waveform-audio all</span><br></pre></td></tr></table></figure>
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/08/02/ES2015 Module/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/07/13/innerHTML vs createElement/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

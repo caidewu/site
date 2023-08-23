@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="使用webpack-dev-server时不要配置6000端口"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>使用webpack-dev-server时不要配置6000端口 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            使用webpack-dev-server时不要配置6000端口
+            
+          </h1>
+          <p class="posted-on">
+          2017-07-02
+          </p>
+          <div class="tags-links">
+            
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>今天在搭建一个新项目，然后使用chrome始终无法访问，反复研究配置文件也没发现有什么不对，仔细看chrome的报错</p>
+<blockquote>
+<p>网址为 <a href="http://localhost:6000/" target="_blank" rel="noopener">http://localhost:6000/</a> 的网页可能暂时无法连接，或者它已永久性地移动到了新网址。<br>ERR_UNSAFE_PORT</p>
+</blockquote>
+<p>一开始我以为是6000端口被占用了，</p>
+<p>使用<code>lsof -i:6000</code>并没有发现有应用占用了6000端口，</p>
+<p>仔细再看报错信息，其实重点是<strong><code>ERR_UNSAFE_PORT</code></strong>,</p>
+<p>难道是浏览器禁用了6000端口？</p>
+<p>于是修改了一下webpack-dev-server指定的端口为6001，可以正常访问了</p>
+<a id="more"></a>
+<p>那么问题来了，chrome到底禁用了哪些端口,google了一下有如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">1,    &#x2F;&#x2F; tcpmux</span><br><span class="line">  7,    &#x2F;&#x2F; echo</span><br><span class="line">  9,    &#x2F;&#x2F; discard</span><br><span class="line">  11,   &#x2F;&#x2F; systat</span><br><span class="line">  13,   &#x2F;&#x2F; daytime</span><br><span class="line">  15,   &#x2F;&#x2F; netstat</span><br><span class="line">  17,   &#x2F;&#x2F; qotd</span><br><span class="line">  19,   &#x2F;&#x2F; chargen</span><br><span class="line">  20,   &#x2F;&#x2F; ftp data</span><br><span class="line">  21,   &#x2F;&#x2F; ftp access</span><br><span class="line">  22,   &#x2F;&#x2F; ssh</span><br><span class="line">  23,   &#x2F;&#x2F; telnet</span><br><span class="line">  25,   &#x2F;&#x2F; smtp</span><br><span class="line">  37,   &#x2F;&#x2F; time</span><br><span class="line">  42,   &#x2F;&#x2F; name</span><br><span class="line">  43,   &#x2F;&#x2F; nicname</span><br><span class="line">  53,   &#x2F;&#x2F; domain</span><br><span class="line">  77,   &#x2F;&#x2F; priv-rjs</span><br><span class="line">  79,   &#x2F;&#x2F; finger</span><br><span class="line">  87,   &#x2F;&#x2F; ttylink</span><br><span class="line">  95,   &#x2F;&#x2F; supdup</span><br><span class="line">  101,  &#x2F;&#x2F; hostriame</span><br><span class="line">  102,  &#x2F;&#x2F; iso-tsap</span><br><span class="line">  103,  &#x2F;&#x2F; gppitnp</span><br><span class="line">  104,  &#x2F;&#x2F; acr-nema</span><br><span class="line">  109,  &#x2F;&#x2F; pop2</span><br><span class="line">  110,  &#x2F;&#x2F; pop3</span><br><span class="line">  111,  &#x2F;&#x2F; sunrpc</span><br><span class="line">  113,  &#x2F;&#x2F; auth</span><br><span class="line">  115,  &#x2F;&#x2F; sftp</span><br><span class="line">  117,  &#x2F;&#x2F; uucp-path</span><br><span class="line">  119,  &#x2F;&#x2F; nntp</span><br><span class="line">  123,  &#x2F;&#x2F; NTP</span><br><span class="line">  135,  &#x2F;&#x2F; loc-srv &#x2F;epmap</span><br><span class="line">  139,  &#x2F;&#x2F; netbios</span><br><span class="line">  143,  &#x2F;&#x2F; imap2</span><br><span class="line">  179,  &#x2F;&#x2F; BGP</span><br><span class="line">  389,  &#x2F;&#x2F; ldap</span><br><span class="line">  465,  &#x2F;&#x2F; smtp+ssl</span><br><span class="line">  512,  &#x2F;&#x2F; print &#x2F; exec</span><br><span class="line">  513,  &#x2F;&#x2F; login</span><br><span class="line">  514,  &#x2F;&#x2F; shell</span><br><span class="line">  515,  &#x2F;&#x2F; printer</span><br><span class="line">  526,  &#x2F;&#x2F; tempo</span><br><span class="line">  530,  &#x2F;&#x2F; courier</span><br><span class="line">  531,  &#x2F;&#x2F; chat</span><br><span class="line">  532,  &#x2F;&#x2F; netnews</span><br><span class="line">  540,  &#x2F;&#x2F; uucp</span><br><span class="line">  556,  &#x2F;&#x2F; remotefs</span><br><span class="line">  563,  &#x2F;&#x2F; nntp+ssl</span><br><span class="line">  587,  &#x2F;&#x2F; stmp?</span><br><span class="line">  601,  &#x2F;&#x2F; ??</span><br><span class="line">  636,  &#x2F;&#x2F; ldap+ssl</span><br><span class="line">  993,  &#x2F;&#x2F; ldap+ssl</span><br><span class="line">  995,  &#x2F;&#x2F; pop3+ssl</span><br><span class="line">  2049, &#x2F;&#x2F; nfs</span><br><span class="line">  3659, &#x2F;&#x2F; apple-sasl &#x2F; PasswordServer</span><br><span class="line">  4045, &#x2F;&#x2F; lockd</span><br><span class="line">  6000, &#x2F;&#x2F; X11</span><br><span class="line">  6665, &#x2F;&#x2F; Alternate IRC [Apple addition]</span><br><span class="line">  6666, &#x2F;&#x2F; Alternate IRC [Apple addition]</span><br><span class="line">  6667, &#x2F;&#x2F; Standard IRC [Apple addition]</span><br><span class="line">  6668, &#x2F;&#x2F; Alternate IRC [Apple addition]</span><br><span class="line">  6669, &#x2F;&#x2F; Alternate IRC [Apple addition]</span><br></pre></td></tr></table></figure>
+<p>通常我们在本地搭建开发环境时通常使用4位数的整数作为端口，比如3000，8000，8080…，所以上面这些被禁用端口就是6000被误用的可能性比较大，记住6000是x11用的端口以后避开就行了</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://superuser.com/questions/188058/which-ports-are-considered-unsafe-on-chrome" target="_blank" rel="noopener">https://superuser.com/questions/188058/which-ports-are-considered-unsafe-on-chrome</a></li>
+<li><a href="https://www.zhihu.com/question/27939248?sort=created" target="_blank" rel="noopener">X11 是什么？</a></li>
+</ul>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2018/02/12/解决在Mac中ssh登录后闲置时间过长而断开连接/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2017/06/24/webpack热更新延迟问题/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

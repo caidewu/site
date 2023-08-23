@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="你知道[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;].map(Function.call, Number)的结果是什么吗？">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="谈谈我对call、apply的理解"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="你知道[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;].map(Function.call, Number)的结果是什么吗？" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>谈谈我对call、apply的理解 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            谈谈我对call、apply的理解
+            
+          </h1>
+          <p class="posted-on">
+          2017-03-10
+          </p>
+          <div class="tags-links">
+            
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <blockquote>
+<p>call在js面试中的地位不亚与prototype，但是可能连面试官都不一定真正搞懂call到底做了什么，不着急，先从标志答案说起</p>
+</blockquote>
+<h2 id="call是用来做什么的"><a href="#call是用来做什么的" class="headerlink" title="call是用来做什么的"></a>call是用来做什么的</h2><p>call是什么？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype.call(thisArg, arg1, arg2, arg3)</span><br></pre></td></tr></table></figure>
+<p>所以call是一个方法（函数）,第一个参数是指定调用函数的上下文(this),后面的参数列表，就是调用函数需要传入的参数</p>
+<p>返回值是执行函数的返回值</p>
+<p>用法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var foo &#x3D; &#123;</span><br><span class="line">	a: &#39;1&#39;,</span><br><span class="line">	b: &#39;2&#39;,</span><br><span class="line">	test: function(args1) &#123;</span><br><span class="line">		console.log(args1);</span><br><span class="line">		return &#123;ta: this.a, tb: this.b&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo.test(&#39;normal invoked&#39;);</span><br><span class="line"></span><br><span class="line">var obj &#x3D; &#123;a: &#39;111&#39;, b: &#39;222&#39;&#125;;</span><br><span class="line">foo.test.call(obj,&#39;invoked by obj&#39;);</span><br></pre></td></tr></table></figure>
+<p>结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输出 normal invoked</span><br><span class="line">返回值是 &#123;ta: &#39;1&#39;, tb: &#39;2&#39;&#125;</span><br><span class="line"></span><br><span class="line">输出 invoked by obj</span><br><span class="line">返回值是 &#123;ta: &#39;111&#39;, tb: &#39;222&#39;&#125;</span><br></pre></td></tr></table></figure>
+<p>所以说，call就是用来改变运行函数执行的上下文环境，也就是this，这个就算是标准答案，我面试时也是这么说的，那么面试官一定会追问下面这个问题</p>
+<h2 id="call与apply有什么区别"><a href="#call与apply有什么区别" class="headerlink" title="call与apply有什么区别"></a>call与apply有什么区别</h2><p>基本用过call和apply的同学基本知道call是接收的参数列表，apply接收的是数组</p>
+<p>而看过文档就知道，apply接收是类数组对象（array-like object），什么是类数组对象，举个例子 <code>arguments</code></p>
+<p>那为什么可以接收数组，因为数组不仅仅是类数组对象，同时他还是数组</p>
+<p>这里举一个apply的实用案例：获取数组中的最大(小)值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.max.apply(null, [12,34,23423,235,32]);</span><br></pre></td></tr></table></figure>
+<p>返回值是：23423</p>
+<h2 id="Function-call"><a href="#Function-call" class="headerlink" title="Function.call"></a>Function.call</h2><blockquote>
+<p>你知道<code>[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;].map(Function.call, Number);</code>的结果是什么吗？</p>
+</blockquote>
+<p>终于进入正题！</p>
+<p>首先map接收两个参数，一个是回调函数<code>function(value, index, array) {}</code>, <br><br>第二参数一般不常用，是指定回调函数的上下文环境，也就是this</p>
+<p>先来看下map的简单实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.map &#x3D; function(fn, ctx) &#123;</span><br><span class="line">	var result &#x3D; new Array(this.length);</span><br><span class="line">	for (var i &#x3D; 0; i &lt; this.length; i++) &#123;</span><br><span class="line">		result[i] &#x3D; fn.call(ctx, this[i], i, this);</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完整版的map polyfill参考<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Polyfill" target="_blank" rel="noopener">这里</a></p>
+<p>因为map内部实现也是用了call方法</p>
+<p>所以<code>[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;].map(Function.call, Number);</code>可以转换成如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line"> 	Function.call.call(Number, &quot;a&quot;,   0, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]),</span><br><span class="line">	Function.call.call(Number, &quot;b&quot;,  1, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]),</span><br><span class="line">	Function.call.call(Number, &quot;c&quot;, 2, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>简化之后会变成如下，这里会让很多人疑惑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">	Number.call(&quot;a&quot;, 0, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]), </span><br><span class="line">	Number.call(&quot;b&quot;, 1, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]),    </span><br><span class="line">	Number.call(&quot;c&quot;, 2, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])    </span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>这时候就要看call的内部实现是怎样的了，根据规范的定义和，我猜测call的内部应该是类似如下的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function F() &#123;</span><br><span class="line">    let args &#x3D; arguments.length &#x3D;&#x3D;&#x3D;1 ? [arguments[0]] : Array.apply(null, arguments);</span><br><span class="line">    let ctx &#x3D; args.shift();</span><br><span class="line"></span><br><span class="line">    if (this &#x3D;&#x3D;&#x3D; F) &#123;</span><br><span class="line">        let that &#x3D; args.shift();</span><br><span class="line">        return ctx.apply(that, args);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return this.apply(ctx, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Function.prototype.fakeCall &#x3D; F;</span><br></pre></td></tr></table></figure>
+<p>再来个简化版，只看执行逻辑，忽略掉参数的处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function F(thisArg, arg1, arg2, arg3) &#123;</span><br><span class="line">	if ( this &#x3D;&#x3D;&#x3D; F ) &#123;</span><br><span class="line">		return thisArg(arg2, arg3);  &#x2F;&#x2F; context: arg1</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		return this(arg1, arg2, arg3); &#x2F;&#x2F; context: thisArg</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也就是说call的内部是把this作为一个函数执行了，如果这时候你已经不知道this是什么了，请回去看第一个例子，一个函数中的this默认是指向它外层的对象，</p>
+<p>正常情况使用call，如 <code>Foo.test.call(obj)</code>,call内部的this就是test，执行this，就是执行test</p>
+<p>再比如<code>[].slice.call(arguments)</code>,call内部this就是slice，执行this，就是执行slice，而slice内部的this就是arguments</p>
+<p>而<code>Function.call.call(Number, &quot;a&quot;,   0, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])</code>, call内部的this指向call，那么call内部会进入if的条件中，执行函数变成了<code>Number.call( &quot;a&quot;,   0, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])</code></p>
+<p>至此应该就可以理解上面的那个简化是怎么来的了</p>
+<p>然后再简化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">	Number(0, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]),    &#x2F;&#x2F; this &#x3D; &#39;a&#39;</span><br><span class="line">	Number(1, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]),    &#x2F;&#x2F; this &#x3D; &#39;b&#39;</span><br><span class="line">	Number(2, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])     &#x2F;&#x2F; this &#x3D; &#39;c&#39;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>最后</p>
+<p><code>[0, 1, 2]</code></p>
+<h2 id="fn-call-call-call-call-call-call"><a href="#fn-call-call-call-call-call-call" class="headerlink" title="fn.call.call.call.call.call.call()"></a>fn.call.call.call.call.call.call()</h2><p>有人看到call.call就这么复杂，那如果是很多个call，意味着什么？</p>
+<p>意味着还是fn.call.call()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Function.call &#x3D;&#x3D;&#x3D; Function.call.call        &#x2F;&#x2F; true</span><br><span class="line">Function.call &#x3D;&#x3D;&#x3D; Function.call.call.call   &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<p>因为Function.prototype.call，这是原型上的方法，点多少个都是它自己，而call只认调用他的那个对象到底是什么，如果是普通对象，那说明只有一个call，如果是call，那就按照call.call的方式去处理</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://blog.sina.com.cn/s/blog_70a3539f0101fref.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_70a3539f0101fref.html</a></li>
+<li><a href="https://zhidao.baidu.com/question/1795031515293789747.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/1795031515293789747.html</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/arguments" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/arguments</a></li>
+<li><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-function.prototype.call" target="_blank" rel="noopener">http://www.ecma-international.org/ecma-262/6.0/#sec-function.prototype.call</a></li>
+<li><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist" target="_blank" rel="noopener">http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist</a></li>
+</ul>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2017/03/10/Untitled/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2017/03/05/display visibility opacity隐藏元素的区别/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

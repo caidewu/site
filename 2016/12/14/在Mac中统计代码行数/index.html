@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="在Mac中统计代码行数，find的命令怎么用"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>在Mac中统计代码行数，find的命令怎么用 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            在Mac中统计代码行数，find的命令怎么用
+            
+          </h1>
+          <p class="posted-on">
+          2016-12-14
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/shell/" rel="tag">
+                  shell
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h3 id="先来看怎么用"><a href="#先来看怎么用" class="headerlink" title="先来看怎么用"></a>先来看怎么用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 统计文件类型是&#96;*.m&#96;,&#96;*.mm&#96;,&#96;*.cpp&#96;,&#96;*.h&#96;,&#96;*.rss&#96;的文件代码行数</span><br><span class="line">find . &quot;(&quot; -name &quot;*.m&quot; -or -name &quot;*.mm&quot; -or -name &quot;*.cpp&quot; -or -name &quot;*.h&quot; -or -name &quot;*.rss&quot; &quot;)&quot; | xargs wc -l</span><br><span class="line"> </span><br><span class="line"># 统计js文件行数</span><br><span class="line">find . &quot;(&quot; -name &quot;*.js&quot; &quot;)&quot; | xargs wc -l</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="仔细看一下"><a href="#仔细看一下" class="headerlink" title="仔细看一下"></a>仔细看一下</h3><p>这条命令主要包含两部分，</p>
+<ul>
+<li>find</li>
+<li>wc</li>
+</ul>
+<p>find是过滤出想要统计的文件，wc是统计，他们中间通过<code>|</code>管道连接</p>
+<p><strong>xargs</strong>：由于很多命令不支持<code>|</code>管道来传递参数</p>
+<p>xargs 可以读入 stdin 的资料，并且以空白字元或断行字元作为分辨，将 stdin 的资料分隔成为 arguments 。</p>
+<p><strong>find .</strong>: 列出当前目录及子目录下所有文件和文件夹 </p>
+<p>来自: <a href="http://man.linuxde.net/find" target="_blank" rel="noopener">http://man.linuxde.net/find</a></p>
+<h3 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h3><blockquote>
+<p><a href="http://man.linuxde.net/wc" target="_blank" rel="noopener">http://man.linuxde.net/wc</a></p>
+</blockquote>
+<ul>
+<li>-c或–bytes或——chars：只显示Bytes数；</li>
+<li>-l或——lines：只显示列数； </li>
+<li>-w或——words：只显示字数。</li>
+</ul>
+<p>如果不带参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  public  &gt;wc index.html</span><br><span class="line">     117     627   14703 index.html</span><br><span class="line">	  行数  Bytes数  字数</span><br></pre></td></tr></table></figure>
+<p>来自: <a href="http://man.linuxde.net/wc" target="_blank" rel="noopener">http://man.linuxde.net/wc</a></p>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><blockquote>
+<p><a href="http://man.linuxde.net/find" target="_blank" rel="noopener">http://man.linuxde.net/find</a></p>
+</blockquote>
+<h4 id="忽略某个子目录"><a href="#忽略某个子目录" class="headerlink" title="忽略某个子目录"></a>忽略某个子目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . &quot;.&#x2F;node_modules&quot; -prune</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-o</code>: 等同<code>-or</code>， 或的意思，类似的条件判断还有与<code>-a</code>,非<code>!</code> </li>
+</ul>
+<h4 id="忽略大小写"><a href="#忽略大小写" class="headerlink" title="忽略大小写"></a>忽略大小写</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">find &#x2F;home -iname &quot;HelloWorld.txt&quot;</span><br><span class="line"></span><br><span class="line">可以匹配上</span><br><span class="line">helloworld.txt</span><br><span class="line">HELLOWORLD.txt</span><br><span class="line">Helloworld.TXT</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="匹配文件路径或文件"><a href="#匹配文件路径或文件" class="headerlink" title="匹配文件路径或文件"></a>匹配文件路径或文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 文件夹或文件名包含local</span><br><span class="line">find &#x2F;usr&#x2F; -path &quot;*local*&quot;</span><br><span class="line"></span><br><span class="line"># 文件夹包含local</span><br><span class="line">find &#x2F;usr&#x2F; -path &quot;*&#x2F;local&#x2F;*&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>-path</strong>: 指定字符串作为寻找目录的关键字</li>
+</ul>
+<h4 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -regex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="根据文件大小来搜索"><a href="#根据文件大小来搜索" class="headerlink" title="根据文件大小来搜索"></a>根据文件大小来搜索</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 搜索大于1G的文件</span><br><span class="line">find . -type f -size +1G</span><br><span class="line"></span><br><span class="line">find . -type f -size -1k</span><br></pre></td></tr></table></figure>
+<ul>
+<li>b —— 块（512字节） </li>
+<li>c —— 字节 </li>
+<li>w —— 字（2字节） </li>
+<li>k —— 千字节 </li>
+<li>M —— 兆字节 </li>
+<li>G —— 吉字节</li>
+</ul>
+<p>#### </p>
+<h4 id="根据文件性质来分类"><a href="#根据文件性质来分类" class="headerlink" title="根据文件性质来分类"></a>根据文件性质来分类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 显示所有目录</span><br><span class="line">find . -type d</span><br></pre></td></tr></table></figure>
+<ul>
+<li>f 普通文件 </li>
+<li>l 符号连接 </li>
+<li>d 目录 </li>
+<li>c 字符设备 </li>
+<li>b 块设备 </li>
+<li>s 套接字 </li>
+<li>p Fifo</li>
+</ul>
+<h4 id="基于目录深度搜索"><a href="#基于目录深度搜索" class="headerlink" title="基于目录深度搜索"></a>基于目录深度搜索</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 向下深度限制为3</span><br><span class="line">find . -maxdepth 3 -type f</span><br><span class="line"></span><br><span class="line"># 向下深度超过2的文件</span><br><span class="line">find . -mindepth 2 -type f</span><br></pre></td></tr></table></figure>
+<h4 id="要列出所有长度为零的文件"><a href="#要列出所有长度为零的文件" class="headerlink" title="要列出所有长度为零的文件"></a>要列出所有长度为零的文件</h4><p>来自: <a href="http://man.linuxde.net/find" target="_blank" rel="noopener">http://man.linuxde.net/find</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -empty</span><br></pre></td></tr></table></figure>
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/12/16/详细说一下这道js面试题/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/12/13/当网管系列/华为交换机配置/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

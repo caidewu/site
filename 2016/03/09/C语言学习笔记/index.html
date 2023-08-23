@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="C语言学习笔记"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>C语言学习笔记 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            C语言学习笔记
+            
+          </h1>
+          <p class="posted-on">
+          2016-03-09
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/C语言/" rel="tag">
+                  C语言
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h3 id="Linux命令相关"><a href="#Linux命令相关" class="headerlink" title="Linux命令相关"></a>Linux命令相关</h3><p>ls -l出来的文件列表，最前面的d代表着这是一个文件夹</p>
+<p>文件夹d 创建者权限rwx   创建者所在用户组权限rwx  其他人r-x<br> drw-rw-r–<br> -rwxrwxr-w</p>
+<p><code>echo</code>: 输出<br>echo $? ：输出上一条命令的返回值                                                    </p>
+<p>touch xxx,新建一个文件</p>
+<p><code>cat</code> 预览文本文件</p>
+<p><code>|</code> Linux管道</p>
+<p><code>grep xxx</code>:过滤出包含xxx的结果</p>
+<p><code>ps</code>: 查看进程<br>例如：<code>ps -e | grep ssh</code> 查看ssh的进程<br><a id="more"></a></p>
+<h3 id="vim-命令相关"><a href="#vim-命令相关" class="headerlink" title="vim 命令相关"></a>vim 命令相关</h3><p><code>i</code>: 当前位置插入<br><code>shift + i</code>: 行首插入<br><code>a</code>: 当前位置后一位插入<br><code>shift + a</code>: 行尾插入<br><code>o</code>: 换下一行插入<br><code>shift + o</code>: 换上一行插入<br><code>s</code>:  删除光标位置的字符，并插入<br><code>shift + s</code>: 删除当前一行，并插入<br><code>control + w</code>  切换tab</p>
+<p><code>:sp xxx</code>: 新增一个tab窗口<br><code>:wqa</code>: 保存所有文件并退出，a指所有文件<br><code>:set nu</code>: 显示行号</p>
+<p><code>10 dd</code>: 剪切当前光标行至10行的内容，<br><code>p</code>: 粘贴</p>
+<h3 id="cc编译命令："><a href="#cc编译命令：" class="headerlink" title="cc编译命令："></a>cc编译命令：</h3><p><code>cc hello.c</code>: 编译hello.c文件，输入默认的a.out执行文件</p>
+<p><code>cc hello.c -o main.out</code>: 输出执行文件名指定为main.out</p>
+<h3 id="c语言"><a href="#c语言" class="headerlink" title="c语言"></a>c语言</h3><p>include包含的<code>&lt;&gt;</code>是指引用的是系统预装的库<br>自己写的用<code>&quot;&quot;</code>包含就可以</p>
+<p>main函数中的return 0; 表示执行成功，其他值表示失败，<br>如果执行失败 ，&amp;&amp; 连接后的命令将不会被执行<br>如：a.out &amp;&amp; ls ,如果a中的main函数return 0；ls将会被执行，否则不会被执行</p>
+<p><code>&amp;</code>: 取地址符<br>如果知道一个地址，则需要在这个地址前面加一个<code>*</code>即可获取到该地址指向的值<br>如果着这个地址指向的不是数据段或者堆或者栈，而是指向代码段，编译器则认为这个地址指向的是一个函数指针<br><code>(*xxx)(arg)</code>即可执行该函数，<br>这种方式通常用于写回调函数</p>
+<p>scanf<br>printf</p>
+<p>linux的流<br>stdin<br>stdout<br>stderr</p>
+<p>输出流的重定向：<br><code>&gt;</code> 覆盖模式；<br><code>&gt;&gt;</code> 追加模式</p>
+<p>输入流重定向：<br><code>&lt;</code> 例如： ./a.out &lt; input.txt</p>
+<p>在64位的操作系统中，指针是占8个字节的，<br>32位系统中的指针是占4个字节<br>32位的地址总线需要4个字节，64位即8个字节</p>
+<h3 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">math.out:max.o min.o math.c</span><br><span class="line">        gcc max.o min.o hello.c -o math.out</span><br><span class="line">max.o:max.c</span><br><span class="line">        gcc -c max.c</span><br><span class="line">min.o:min.c</span><br><span class="line">        gcc -c min.c</span><br></pre></td></tr></table></figure>
+<p>注意Makefile文件中的缩减使用的是tap，而不是空格</p>
+<h3 id="Debugger命令"><a href="#Debugger命令" class="headerlink" title="Debugger命令"></a>Debugger命令</h3><p><code>n</code> 执行下一行代码<br><code>p</code> 打印命令，如 <code>p a</code>即打印a变量的值<br><code>s</code> 进入函数<br><code>bt</code> 显示函数所在栈<br><code>f</code> 切换当前所处在的函数</p>
+<p><code>x/&lt;n/f/u&gt; &lt;addr&gt;</code><br>n、f、u是可选的参数，<addr>表示一个内存地址</p>
+<ul>
+<li>n 是一个正整数，表示显示内存的长度，也就是说从当前地址向后显示几个地址的内容</li>
+<li>f 表示显示的格式</li>
+<li>u 表示将多少个字节作为一个值取出来，如果不指定的话，GDB默认是4个bytes，如果不指定的话，默认是4个bytes。当我们指定了字节长度后，GDB会从指内存定的内存地址开始，读写指定字节，并把其当作一个值取出来。</li>
+</ul>
+<p>参数 f 的可选值：<br>x 按十六进制格式显示变量。<br>d 按十进制格式显示变量。<br>u 按十六进制格式显示无符号整型。<br>o 按八进制格式显示变量。<br>t 按二进制格式显示变量。<br>a 按十六进制格式显示变量。<br>c 按字符格式显示变量。<br>f 按浮点数格式显示变量。</p>
+<p>参数 u 可以用下面的字符来代替：<br>b 表示单字节<br>h 表示双字节<br>w 表示四字节<br>g 表示八字节</p>
+<ul>
+<li>注意这里的命令执行后，默认命令就被替换，</li>
+</ul>
+<p>例如：<br>(gdb) p record<br><code>$10 = {12, 76, 48, 62, 94, 17, 32, 37, 52, 69}</code><br>(gdb) p &amp;record<br><code>$11 = (int (*)[10]) 0x8049740</code><br>(gdb) x/4uw 0x8049740<br><code>0x8049740 &lt;record&gt;:    12    76    48    62</code><br>(gdb) x/6ow 0x8049740<br><code>0x8049740 &lt;record&gt;:    014    0114    060    076</code><br><code>0x8049750 &lt;record+16&gt;:    0136    021</code></p>
+<p>字符指针：存在代码段中 (不能被修改，通常用作常量)<br>字符数组：存在栈中 </p>
+<p>C语言只有在定义字符数组的时候才能用“=”来初始化变量，其它情况下是不能直接用“=”来为字符数组赋值的</p>
+<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><p>宏<br>宏替换：在预处理阶段使用字符串替换的方式</p>
+<p>不考虑语法，</p>
+<p>常量<br><code>#define M 100</code></p>
+<p>宏函数，不考虑c的语法，不需要设置参数类型<br><code>#define ADD(a,b)(a+b)</code></p>
+<p>别名： <code>typedef int aaa;</code></p>
+<p>typedef是有作用域的，宏是全局的</p>
+<p>共用体（联合体）：让几个不同类型的变量共享同一个内存地址<br><code>union</code></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/03/09/CSS学习笔记/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/03/09/Charles3.11-hack/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

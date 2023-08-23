@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="浏览器缓存测试情况"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>浏览器缓存测试情况 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            浏览器缓存测试情况
+            
+          </h1>
+          <p class="posted-on">
+          2016-12-22
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/浏览器/" rel="tag">
+                  浏览器
+                </a>
+              
+                <a href="/tags/缓存/" rel="tag">
+                  缓存
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h2 id="no-cache的情况"><a href="#no-cache的情况" class="headerlink" title="no-cache的情况"></a>no-cache的情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Cache-Control: no-cache</span><br><span class="line">Content-Type: image&#x2F;png</span><br><span class="line">Last-Modified: Tue, 08 Nov 2016 06:59:00 GMT</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Date: Thu, 10 Nov 2016 02:48:50 GMT</span><br><span class="line">Content-Length: 3534</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>打开方式</th>
+<th>chrome</th>
+<th>safari</th>
+<th>firefox</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刷新</td>
+<td>304</td>
+<td>304</td>
+<td>304</td>
+</tr>
+<tr>
+<td>链接打开</td>
+<td>304</td>
+<td>304</td>
+<td>304</td>
+</tr>
+<tr>
+<td>地址栏回车</td>
+<td>304</td>
+<td>304</td>
+<td>304</td>
+</tr>
+</tbody>
+</table>
+<p>304的原因是：请求头里带上了If-Modified-Since，这个请求头是判断Last-Modified的时间是否大于http连接建立时间，没有大于，所以返回304</p>
+<a id="more"></a>
+<h2 id="no-store的情况"><a href="#no-store的情况" class="headerlink" title="no-store的情况"></a>no-store的情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Cache-Control: no-store</span><br><span class="line">Content-Type: image&#x2F;png</span><br><span class="line">Last-Modified: Tue, 08 Nov 2016 06:59:00 GMT</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Date: Thu, 10 Nov 2016 02:48:50 GMT</span><br><span class="line">Content-Length: 3534</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>打开方式</th>
+<th>chrome</th>
+<th>safari</th>
+<th>firefox</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刷新</td>
+<td>200</td>
+<td>200</td>
+<td>200</td>
+</tr>
+<tr>
+<td>链接打开</td>
+<td>200</td>
+<td>200</td>
+<td>200</td>
+</tr>
+<tr>
+<td>地址栏回车</td>
+<td>200</td>
+<td>200</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+<h2 id="新鲜度有效的情况"><a href="#新鲜度有效的情况" class="headerlink" title="新鲜度有效的情况"></a>新鲜度有效的情况</h2><ul>
+<li>在响应头中Cache Control 或Expiels没有的情况下</li>
+<li>public</li>
+<li>private</li>
+<li>max-age=大于0的数值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>打开方式</th>
+<th>chrome</th>
+<th>safari</th>
+<th>firefox</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刷新</td>
+<td>from cache</td>
+<td>304</td>
+<td>304</td>
+</tr>
+<tr>
+<td>链接打开</td>
+<td>from cache</td>
+<td>from cache</td>
+<td>from cache</td>
+</tr>
+<tr>
+<td>地址栏回车</td>
+<td>from cache</td>
+<td>from cache</td>
+<td>from cache</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong></p>
+<ul>
+<li><p>Safari和firefox在刷新的时候出现304是因为刷新时浏览器在请求头上设置了<code>Cache-Control: max-age=0</code>，而chrome并不会</p>
+</li>
+<li><p>对于刚刚修改了的文件，且没有设置max-age或max-age很小的，二次加载资源的时间和第一次加载资源的时间间隔较长，是不会出现以下的结果，因为新鲜度是有时间限制的, 修改时间离请求建立时间越短，新鲜度有效期越短，（说明这个文件改动频繁，就不需要缓存太长时间）</p>
+<blockquote>
+<p>max-age = (Date.now() - Last-Modified) * 10%</p>
+</blockquote>
+</li>
+</ul>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/12/22/再来看Javascript中的原型/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/12/21/跨域问题/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

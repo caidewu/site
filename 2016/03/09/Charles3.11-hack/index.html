@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="关于Charles3.11的破解过程，本文所有操作均在Mac OS X EI Capitan下进行">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="Charles3.11-hack"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="关于Charles3.11的破解过程，本文所有操作均在Mac OS X EI Capitan下进行" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>Charles3.11-hack - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            Charles3.11-hack
+            
+          </h1>
+          <p class="posted-on">
+          2016-03-09
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/hack/" rel="tag">
+                  hack
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <blockquote>
+<p>关于Charles3.11的破解过程，本文所有操作均在Mac OS X EI Capitan下进行</p>
+</blockquote>
+<h2 id="先上结果"><a href="#先上结果" class="headerlink" title="先上结果"></a>先上结果</h2><p>链接: <a href="http://pan.baidu.com/s/1o64C1ku" target="_blank" rel="noopener">http://pan.baidu.com/s/1o64C1ku</a> 密码: q9av</p>
+<blockquote>
+<p>前提: 首先版本得是Charles 3.11.1，理论说3.11也是可以的，3.10以下的不用试了</p>
+</blockquote>
+<ol>
+<li>将jar包下载下来后，将名字改成charles.jar</li>
+<li>打开应用程序文件夹，找到Charles - 显示包内容 - Contents - Java </li>
+<li>找到charles.jar,替换之即可</li>
+</ol>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>本来用的3.9.3好好的，但是系统升级10.11后，出现了一些这样的情况<br><br><img src="http://7fvd05.com1.z0.glb.clouddn.com/hacking-charles-11.png" alt="1"></p>
+<p>每次滚动代码时就变成这样，<br><br><br>忍受了一个多月后，终于决定要升级<br>去官网下了目前的最新版，3.11.1<br>然后天真的想去下个序列号或者什么注册机破解就ok了，<br>于是我百度了一下<br>然后是这样的</p>
+<p><img src="http://7fvd05.com1.z0.glb.clouddn.com/hacking-charles-12.png" alt=""></p>
+<p><br><br>大概了解到的情况是需要替换<code>charles.jar</code>这个jar包就可以破解，<br>然后我一个个下下来，一个个试<br>好吧，结果中没有一个是3.11.1可用的<br><br><br>只能google一下，<br>找到一篇3.10.1的破解教程，<a href="http://www.gfzj.us/tech/2015/06/24/charles-hacking.html" target="_blank" rel="noopener">Charles Web Debugging Proxy Hacking</a><br>作者破解的过程大概就是把charles.jar反编译后找到Licence.java，然后把验证函数上返回true，然后编译成License.class重新打包进charles.jar里，<br>文中作者提供了已经hack过的Licence.java，于是我按照步骤试了一下，<br>果然，，，，失败了，</p>
+<p>文中作者有说他的操作都是在3.10.1版本才可以</p>
+<p>于是我重新下了3.10.1，再次尝试，</p>
+<p>成功了！！！<br>但是，3.10.1版本依旧存在滚屏文字错乱的问题<br>所以我折腾了这一圈并没有什么乱用</p>
+<p>既然破解的原理都辣么简单通俗易懂，我自己来hack一下License不就行了，<br>于是，<br>先要反编译一下charles，多年没摸过java，反编译工具都没有，<br>下一个，下载地址：<a href="https://github.com/skylot/jadx" target="_blank" rel="noopener">https://github.com/skylot/jadx</a><br><br><br>解压，进入jadx-0.6.0目录中,<br>（ps. 为了方便我把3.11.1的charles.jar考到jadx目录中，特么3.11.1中charles.jar所在目录变成了Contents/Java/charles.jar,之前的版本一直都是Contents/Resources/Java/charles.jar)</p>
+<p>执行命令 <code>bin/jadx-gui charles.jar</code><br><br><br><img src="http://7fvd05.com1.z0.glb.clouddn.com/hacking-charles-13.png" alt=""></p>
+<p><br><br>我需要找到<code>com.xk72.charles.gui.License.java</code><br>然而<br>并没有!</p>
+<p>所以刚刚之所以用那个破解好的License.java去替换并没有用的原因就是charles升级后修改这块的验证策略，连Licence.java都没有那什么来替换，<br><br><br>会不会只是改了个类名，License.java 肯定是有的，不过它不叫这个名字而已，</p>
+<p>一般来说如果真的只换个类名应该就还在<code>com.xk72.charles.gui</code> 这个工作空间下<br>于是我看到了它，<br><img src="http://7fvd05.com1.z0.glb.clouddn.com/hacking-charles-14.png" alt=""><br>和License.java内容几乎一样，居然叫个P，</p>
+<p><br><br>好吧，接下来的工作就是参照3.10.1被hack的License.java来修改代码中验证部分<br>用文件对比工具来改简单一些<br><img src="http://7fvd05.com1.z0.glb.clouddn.com/hacking-charles-15.png" alt=""><br><br><br>然后把P.java拷贝到charles的包中,和<code>Contents/Java/charles.jar</code>同一级目录<br>然后<br>编译：<code>javac -source 1.6 -target 1.6 -d . P.java</code><br>打包：<code>jar -uvf charles.jar com/xk72/charles/gui/P*</code><br><br><br>最后执行打开Charles命令：<code>open /Applications/Charles.app</code>（直接双击打开也是可以的）<br>没错，<br>成功了<br><img src="http://7fvd05.com1.z0.glb.clouddn.com/hacking-charles-16.png" alt=""></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/03/09/C语言学习笔记/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/02/12/Javascript/Javascript中的构造函数/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

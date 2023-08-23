@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="蔡德伍">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="关于304缓存与200from cache缓存"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="麦桃说"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>关于304缓存与200from cache缓存 - 麦桃说</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="麦桃说" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            关于304缓存与200from cache缓存
+            
+          </h1>
+          <p class="posted-on">
+          2016-12-21
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/浏览器/" rel="tag">
+                  浏览器
+                </a>
+              
+                <a href="/tags/缓存/" rel="tag">
+                  缓存
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>我们常见的浏览器缓存有两种，一种状态码是200，size显示是from-cache，另一种状态码是304，也就是通常我们说的304缓存</p>
+<p>根据<a href="https://tools.ietf.org/html/rfc7234" target="_blank" rel="noopener">HTTP协议规范</a>的定义，浏览器的缓存机制分为两块，也就是规范中的4.2. Freshness 和 4.3. Validation。</p>
+<ul>
+<li>Freshness（新鲜度），这个条件成立，就是200 from cache缓存，</li>
+<li>Validation（验证），当Freshness不成立时，就要看Validation，成立就是304缓存，不成立，拉取的就是新数据</li>
+</ul>
+<p>但是实际情况，某些浏览器并不是完全按照协议来实现缓存机制的，这个后面讲，先看Freshness和Validation是什么东西</p>
+<h2 id="Freshness（新鲜度）"><a href="#Freshness（新鲜度）" class="headerlink" title="Freshness（新鲜度）"></a>Freshness（新鲜度）</h2><p>决定一个资源是不是足够新鲜，需要看资源的两个响应头Expires和Cache Control，他们是用来进行Freshness验证，也就是提供客户端检测文件是否足够新鲜，可以无需向服务端发起Validation请求就能保证并未过期可以直接使用。</p>
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><p>http1.0版本定义的，明确的过期时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expires:Sat, 30 Dec 2017 00:52:32 GMT</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache Control"></a>Cache Control</h3><p>为什么要有Cache Control是由于历史原因，在HTTP1.0中定义的是Expires，Expires的值是一个明确的过期时间，是服务端时间，而后来使用中发现一旦客户端时间与服务器时间不一致就会引发很多缓存问题。所以在HTTP1.1中增加了Cache Control，其中的max-age是一个数值，单位（秒），告知客户端这个文件多长时间不会过期而不是直接告知过期时间。</p>
+<p>如下，告诉客户端这个资源有效期一年</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cache-control:public, max-age&#x3D;31536000</span><br></pre></td></tr></table></figure>
+<p>详细看下Cache Control的值有哪些，因为Cache Control是通用Header，所以当时做为请求头和响应头时，其值的作用是不一样的</p>
+<p>Cache-Control作为请求头的时候，是浏览器期望服务器返回什么的资源，有以下这些值，no-cache，no-store，max-age，max-state，min-fresh，no-transform，only-if-cached</p>
+<p>Cache-Control作为响应头的时候，可以有以下这些值：public，private，no-cache，no-store，no-transform，must-revalidate，proxy-revalidate，max-age，s-maxage，cache-extension</p>
+<p>这里很多值是给缓存服务器用的，对于浏览器端，主要说三种情况</p>
+<h4 id="no-store"><a href="#no-store" class="headerlink" title="no-store"></a>no-store</h4><p>这个值出现时，<strong>浏览器完全不缓存资源</strong>，所以不管新鲜度还是验证的都没啥事了，没有200 from cache，也没有304，每次请求都是重新向服务器拉新的资源</p>
+<h4 id="max-age大于0"><a href="#max-age大于0" class="headerlink" title="max-age大于0"></a>max-age大于0</h4><p>首先缓存资源，然后资源的新鲜度是当前时间 + max-age指定的时间</p>
+<h4 id="no-cache-或-max-age-0"><a href="#no-cache-或-max-age-0" class="headerlink" title="no-cache 或 max-age=0"></a>no-cache 或 max-age=0</h4><p>这两种可以理解为是一样的，即缓存资源，但其新鲜度立即过期，也就是一定需要发起Validation的</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>比如没有配置Cache Control的情况（同时也没有配置Expires），其实这种情况是很多的，或者配置的是public，private之类的</p>
+<p>这个时候资源的新鲜度有效期是是http连接建立时间减去文件最后修改时间的10%</p>
+<p>可以这样理解</p>
+<p><code>max-age = (Date - Last-Modified) * 10%</code><br><br>或<br><br><code>expires: 当前时间 + (Date - Last-Modified) * 10%</code></p>
+<p>从上面的公式可以看出，如果一个资源刚被修改过，那么新鲜度时间就会很短，反之，如果长时间没被改动过，那么其新鲜度时间就会很长</p>
+<hr>
+<p>所有的from cache的请求实际上都是由于浏览器认为本地的缓存资源足够新鲜，所以并没有发起http请求，而是直接从硬盘(from-disk-cache)或内存(from-memory-cache)中读取上次缓存的资源</p>
+<p>缓存在硬盘重要不清空缓存，缓存有效期内，资源都是在的，和浏览器重不重启没有关系</p>
+<h3 id="如何更新这种缓存"><a href="#如何更新这种缓存" class="headerlink" title="如何更新这种缓存"></a>如何更新这种缓存</h3><p>所以资源被缓存后，更新版本时，就需要给资源加上时间戳，否则，是没法刷新缓存的，你不能指望的用户发现内容不对时还清空缓存试试</p>
+<p>关于时间戳可以看这篇<br><a href="http://mp.weixin.qq.com/s/Mxgig7-F735xSWnoKEe5Vg" target="_blank" rel="noopener">非覆盖式静态资源发布</a></p>
+<h2 id="Validation（验证）"><a href="#Validation（验证）" class="headerlink" title="Validation（验证）"></a>Validation（验证）</h2><p>Last-Modified和ETag则是另一组控制信息，他们用来实现Validation。他们的职责是在本地缓存被浏览器判断可能不够新鲜的时候，<strong>会用这两组信息向服务器请求数据</strong>，如果服务器内容没有改变，那么约定服务器会返回304 HTTP Code表明这个缓存可以直接使用，无需重新拉取，而一旦服务器内容改变了就会返回200，同时返回新的文件内容。</p>
+<p>所以Validation的意思是向服务端发送请求，Last-Modified或ETag验证资源是否有改动来判断是非使用缓存，所以304缓存是存在一个TTR时间（完成一次请求响应回路）</p>
+<h3 id="Last-Modified-http1-0"><a href="#Last-Modified-http1-0" class="headerlink" title="Last-Modified(http1.0)"></a>Last-Modified(http1.0)</h3><p>表示的是文件最后修改的时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Last-Modified:Wed, 28 Dec 2016 14:31:40 GMT</span><br></pre></td></tr></table></figure>
+<h3 id="ETag-http1-1"><a href="#ETag-http1-1" class="headerlink" title="ETag(http1.1)"></a>ETag(http1.1)</h3><p>有了前面的Cache-Control铺垫，这里的ETag也很好理解了</p>
+<p>Last-Modified的缺点：</p>
+<ul>
+<li>只有秒级精度，如果一秒内有多次修改，缓存会有问题，这算什么问题？？？</li>
+<li>如果文件不是正常更新的，比如一个老文件覆盖了新的文件，这…确实有问题，比如想滚回老版本，不过即使是老版本，发布前重新构建后也就不存在旧文件覆盖文件的问题了</li>
+<li>如果一个文件被修改，但是内容并没有变化，这时候我们喜欢不刷新缓存，但是Last-Modified只看文件修改日期，过期就刷新缓存，不管内容有没有变化</li>
+</ul>
+<p>HTTP1.1中新引入了ETag，他的实现不尽相同，对于动态内容，常规做法是</p>
+<ul>
+<li>动态内容做HASH计算，作为ETAG返回</li>
+<li>静态资源，一般是使用inode+mtime进行计算。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETag:&quot;215d-53838ca8b3cc0&quot;</span><br></pre></td></tr></table></figure>
+<p>But，在分布式系统中，相同文件在不同机器上的的inode是不一样的，这就导致了ETag不一样，进而导致304失效，所以实际使用上是会关闭ETag，还是依靠Last-Modified来做Validation判断</p>
+<h2 id="实际情况"><a href="#实际情况" class="headerlink" title="实际情况"></a>实际情况</h2><p>实际上我在Chrome中打开控制台看到，很多情况，不管Expires和Cache Control有没有效，缓存都是200 from cache，<br>而当我打开Safari时，304出来了, 如下图，上面Safari，下面是Chrome<br><img src="http://caidewu-blog-img.qiniudn.com/chrome304.png?imageView2/2/w/800" alt=""></p>
+<h3 id="浏览器行为"><a href="#浏览器行为" class="headerlink" title="浏览器行为"></a>浏览器行为</h3><p>对于加载一个页面，我们通常有三种方式</p>
+<ul>
+<li>输入url，回车打开页面</li>
+<li>链接打开</li>
+<li>刷新</li>
+</ul>
+<p>对于静态资源缓存的处理，我测试的情况是，输入url和链接打开行为都是一致的，不一样的在于刷新</p>
+<p>Safari和Firefox在刷新时，都会加在一个请求头 <code>Cache-Control: max-age=0</code>,也就是说，刷新的时候，即使资源是新鲜的，浏览器也会发起Validation，然后返回304</p>
+<p>而Chrome在刷新时并不会带上<code>Cache-Control: max-age=0</code>，所以上图的情况就解释的通了</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接:"></a>参考链接:</h2><blockquote>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc7234#section-4.2.2" target="_blank" rel="noopener"> Hypertext Transfer Protocol (HTTP/1.1)</a></li>
+<li><a href="http://mp.weixin.qq.com/s/qOMO0LIdA47j3RjhbCWUEQ" target="_blank" rel="noopener">彻底弄懂 Http 缓存机制 - 基于缓存策略三要素分解法</a></li>
+<li><a href="http://www.oschina.net/code/snippet_130291_14275" target="_blank" rel="noopener">Nginx只缓存静态文件配置</a></li>
+</ul>
+</blockquote>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2016/12/21/跨域问题/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/12/16/详细说一下这道js面试题/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          caidewu, 蔡德伍, Javascript, HTML5, 前端, Mac, iOS, Windows
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>麦桃说 &copy; 2022</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>
